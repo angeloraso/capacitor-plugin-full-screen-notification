@@ -1,4 +1,4 @@
-# y
+# Capacitor Plugin Full Screen Notification
 
 Plugin to create a full screen notification
 
