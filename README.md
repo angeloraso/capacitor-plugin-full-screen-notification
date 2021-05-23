@@ -5,7 +5,7 @@ Plugin to create a full screen notification
 ## Install
 
 ```bash
-npm install y
+npm install capacitor-plugin-full-screen-notification
 npx cap sync
 ```
 
