@@ -1,5 +1,5 @@
 {
-  "name": "y",
+  "name": "capacitor-plugin-full-screen-notification",
   "version": "0.0.1",
   "description": "Plugin to create a full screen notification",
   "main": "dist/plugin.cjs.js",

@@ -1,3 +1,4 @@
 export interface FullScreenNotificationPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
+  show(): Promise<{ data: string }>;
+  hide(): Promise<{ data: string }>;
 }
