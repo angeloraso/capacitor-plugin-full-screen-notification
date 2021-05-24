@@ -11,7 +11,7 @@
                 <action android:name="android.intent.action.NOTIFICATION_SERVICE"/>
             </intent-filter>
         </service>
-        <receiver android:name=".HungUpBroadcast" android:enabled="true" android:exported="true"/>
+        <receiver android:name=".DiscardBroadcast" android:enabled="true" android:exported="true"/>
         <receiver android:name=".AnswerBroadcast" android:enabled="true" android:exported="true"/>
     </application>
 

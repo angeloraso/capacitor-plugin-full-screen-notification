@@ -6,14 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import com.getcapacitor.Bridge;
-
-
-public class HungUpBroadcast extends BroadcastReceiver {
+public class DiscardBroadcast extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        FullScreenNotificationPlugin.hungup();
+        FullScreenNotificationPlugin.discard();
         if (Build.VERSION.SDK_INT >= 26) {
             NotificationService.that.stopForeground(Service.STOP_FOREGROUND_REMOVE);
         }

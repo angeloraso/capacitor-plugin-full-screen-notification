@@ -1,12 +1,12 @@
 package com.angeloraso.plugins.fullscreennotification;
 
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.getcapacitor.Bridge;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
@@ -43,6 +43,9 @@ public class FullScreenNotificationPlugin extends Plugin {
 
     @PluginMethod
     public void hide() {
+        if (Build.VERSION.SDK_INT >= 26) {
+            NotificationService.that.stopForeground(Service.STOP_FOREGROUND_REMOVE);
+        }
     }
 
     public static void answer() {
@@ -54,9 +57,9 @@ public class FullScreenNotificationPlugin extends Plugin {
     }
 
 
-    public static void hungup() {
+    public static void discard() {
         JSObject output = new JSObject();
-        output.put("data", "hungup");
+        output.put("data", "discard");
         FullScreenNotificationPlugin.call.resolve(output);
     }
 

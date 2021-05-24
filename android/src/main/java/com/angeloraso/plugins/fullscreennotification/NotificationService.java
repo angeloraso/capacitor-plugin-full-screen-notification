@@ -27,15 +27,15 @@ public class NotificationService extends Service {
     NotificationService.that = this;
     final RemoteViews customView = new RemoteViews(intent.getPackage(), intent.getIntExtra("activity_notification", 0));
     final Intent notificationIntent = new Intent("android.intent.action.NOTIFICATION_ACTIVITY");
-    final Intent hungupIntent = new Intent(this, HungUpBroadcast.class);
+    final Intent discardIntent = new Intent(this, DiscardBroadcast.class);
     final Intent answerIntent = new Intent(this, AnswerBroadcast.class);
 
     final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-    final PendingIntent hungupPendingIntent = PendingIntent.getBroadcast(this, 0, hungupIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    final PendingIntent discardPendingIntent = PendingIntent.getBroadcast(this, 0, discardIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent answerPendingIntent = PendingIntent.getBroadcast(this, 0, answerIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
     customView.setOnClickPendingIntent(intent.getIntExtra("btnAnswer", 0), answerPendingIntent);
-    customView.setOnClickPendingIntent(intent.getIntExtra("btnDecline", 0), hungupPendingIntent);
+    customView.setOnClickPendingIntent(intent.getIntExtra("btnDecline", 0), discardPendingIntent);
 
     PowerManager powerManager = (PowerManager) this.getSystemService(POWER_SERVICE);
 
