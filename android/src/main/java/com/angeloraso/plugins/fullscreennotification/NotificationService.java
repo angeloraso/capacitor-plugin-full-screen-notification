@@ -64,7 +64,7 @@ public class NotificationService extends Service {
       final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
       notificationManager.createNotificationChannel(notificationChannel);
 
-      final NotificationCompat.Builder notification = new NotificationCompat.Builder(this, "IncomingCall");
+      final NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID);
       notification.setContentTitle("Llamada entrante");
       notification.setContentText("Angelo - 2213456788");
       notification.setTicker("Call_STATUS");
