@@ -34,8 +34,10 @@ public class NotificationService extends Service {
     final PendingIntent discardPendingIntent = PendingIntent.getBroadcast(this, 0, discardIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent answerPendingIntent = PendingIntent.getBroadcast(this, 0, answerIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+    customView.setTextViewText(intent.getIntExtra("nameText", 0), intent.getStringExtra("name"));
+    customView.setTextViewText(intent.getIntExtra("numberText", 0), intent.getStringExtra("number"));
     customView.setOnClickPendingIntent(intent.getIntExtra("btnAnswer", 0), answerPendingIntent);
-    customView.setOnClickPendingIntent(intent.getIntExtra("btnDecline", 0), discardPendingIntent);
+    customView.setOnClickPendingIntent(intent.getIntExtra("btnDiscard", 0), discardPendingIntent);
 
     PowerManager powerManager = (PowerManager) this.getSystemService(POWER_SERVICE);
 
@@ -66,7 +68,7 @@ public class NotificationService extends Service {
 
       final NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID);
       notification.setContentTitle("Llamada entrante");
-      notification.setContentText("Angelo - 2213456788");
+      notification.setContentText(intent.getStringExtra("name") + " - " + intent.getStringExtra("number"));
       notification.setTicker("Call_STATUS");
       // Para no mostrar el horario de notificación. No aporta información útil al usuario
       notification.setShowWhen(false);

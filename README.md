@@ -13,7 +13,7 @@ npx cap sync
 
 <docgen-index>
 
-* [`show()`](#show)
+* [`show(...)`](#show)
 * [`hide()`](#hide)
 
 </docgen-index>
@@ -21,11 +21,15 @@ npx cap sync
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-### show()
+### show(...)
 
 ```typescript
-show() => any
+show(terminal: { name: string; number: string; }) => any
 ```
+
+| Param          | Type                                           |
+| -------------- | ---------------------------------------------- |
+| **`terminal`** | <code>{ name: string; number: string; }</code> |
 
 **Returns:** <code>any</code>
 

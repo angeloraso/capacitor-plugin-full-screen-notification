@@ -7,8 +7,14 @@
     "methods": [
       {
         "name": "show",
-        "signature": "() => any",
-        "parameters": [],
+        "signature": "(terminal: { name: string; number: string; }) => any",
+        "parameters": [
+          {
+            "name": "terminal",
+            "docs": "",
+            "type": "{ name: string; number: string; }"
+          }
+        ],
         "returns": "any",
         "tags": [],
         "docs": "",

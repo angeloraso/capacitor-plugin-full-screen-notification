@@ -31,10 +31,12 @@ public class FullScreenNotificationPlugin extends Plugin {
         Intent intent = new Intent("android.intent.action.NOTIFICATION_SERVICE");
         intent.setPackage(FullScreenNotificationPlugin.app.getPackageName());
         intent.putExtra("activity_notification", FullScreenNotificationPlugin.app.getResources().getIdentifier("activity_notification", "layout", FullScreenNotificationPlugin.app.getPackageName()));
-        intent.putExtra("caller_text", "Caller Test");
-        intent.putExtra("callType", FullScreenNotificationPlugin.app.getResources().getIdentifier("callType", "id", FullScreenNotificationPlugin.app.getPackageName()));
+        intent.putExtra("name", call.getString("name"));
+        intent.putExtra("number", call.getString("number"));
+        intent.putExtra("nameText", FullScreenNotificationPlugin.app.getResources().getIdentifier("nameText", "id", FullScreenNotificationPlugin.app.getPackageName()));
+        intent.putExtra("numberText", FullScreenNotificationPlugin.app.getResources().getIdentifier("numberText", "id", FullScreenNotificationPlugin.app.getPackageName()));
         intent.putExtra("btnAnswer", FullScreenNotificationPlugin.app.getResources().getIdentifier("btnAnswer", "id", FullScreenNotificationPlugin.app.getPackageName()));
-        intent.putExtra("btnDecline", FullScreenNotificationPlugin.app.getResources().getIdentifier("btnDecline", "id", FullScreenNotificationPlugin.app.getPackageName()));
+        intent.putExtra("btnDiscard", FullScreenNotificationPlugin.app.getResources().getIdentifier("btnDiscard", "id", FullScreenNotificationPlugin.app.getPackageName()));
         intent.putExtra("icon", FullScreenNotificationPlugin.app.getResources().getIdentifier("icon", "drawable", FullScreenNotificationPlugin.app.getPackageName()));
         if (Build.VERSION.SDK_INT >= 26) {
             FullScreenNotificationPlugin.app.startForegroundService(intent);
@@ -51,9 +53,9 @@ public class FullScreenNotificationPlugin extends Plugin {
     public static void answer() {
         JSObject output = new JSObject();
         output.put("data", "answer");
-        FullScreenNotificationPlugin.call.resolve(output);
         Intent intent = FullScreenNotificationPlugin.context.getPackageManager().getLaunchIntentForPackage(FullScreenNotificationPlugin.context.getPackageName());
         FullScreenNotificationPlugin.app.startActivity(intent);
+        FullScreenNotificationPlugin.call.resolve(output);
     }
 
 

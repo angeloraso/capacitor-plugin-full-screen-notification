@@ -1,5 +1,8 @@
 export interface FullScreenNotificationPlugin {
-    show(): Promise<{
+    show(terminal: {
+        name: string;
+        number: string;
+    }): Promise<{
         data: string;
     }>;
     hide(): Promise<{
