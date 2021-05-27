@@ -7,7 +7,7 @@ export class FullScreenNotificationWeb extends WebPlugin implements FullScreenNo
     return { data: terminal.name };
   }
 
-  async hide(): Promise<void> {
-    return;
+  async hide(): Promise<{ data: 'success' | 'error' }> {
+    return {data: 'success'};
   }
 }

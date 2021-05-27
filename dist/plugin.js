@@ -11,7 +11,7 @@ var capacitorFullScreenNotification = (function (exports, core) {
             return { data: terminal.name };
         }
         async hide() {
-            return;
+            return { data: 'success' };
         }
     }
 

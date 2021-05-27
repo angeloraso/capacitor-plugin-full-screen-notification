@@ -46,10 +46,14 @@ public class FullScreenNotificationPlugin extends Plugin {
     }
 
     @PluginMethod
-    public void hide() {
-        if (Build.VERSION.SDK_INT >= 26 && FullScreenNotificationPlugin.thereIsANotification) {
-            NotificationService.that.stopForeground(Service.STOP_FOREGROUND_REMOVE);
+    public void hide(PluginCall call) {
+        if (Build.VERSION.SDK_INT >= 26 && NotificationService.that != null) {
+            NotificationService.that.stopForeground(FullScreenNotificationPlugin.thereIsANotification);
+            FullScreenNotificationPlugin.thereIsANotification = false;
         }
+        JSObject output = new JSObject();
+        output.put("data", "success");
+        call.resolve(output);
     }
 
     public static void answer() {

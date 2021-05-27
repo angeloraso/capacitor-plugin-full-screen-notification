@@ -5,5 +5,7 @@ export interface FullScreenNotificationPlugin {
     }): Promise<{
         data: string;
     }>;
-    hide(): Promise<void>;
+    hide(): Promise<{
+        data: 'success' | 'error';
+    }>;
 }
