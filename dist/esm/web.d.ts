@@ -7,7 +7,5 @@ export declare class FullScreenNotificationWeb extends WebPlugin implements Full
     }): Promise<{
         data: string;
     }>;
-    hide(): Promise<{
-        data: string;
-    }>;
+    hide(): Promise<void>;
 }

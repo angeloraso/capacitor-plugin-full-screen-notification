@@ -5,7 +5,7 @@ export class FullScreenNotificationWeb extends WebPlugin {
         return { data: terminal.name };
     }
     async hide() {
-        return { data: 'hide' };
+        return;
     }
 }
 //# sourceMappingURL=web.js.map

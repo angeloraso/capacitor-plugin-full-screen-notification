@@ -14,7 +14,7 @@ class FullScreenNotificationWeb extends core.WebPlugin {
         return { data: terminal.name };
     }
     async hide() {
-        return { data: 'hide' };
+        return;
     }
 }
 
