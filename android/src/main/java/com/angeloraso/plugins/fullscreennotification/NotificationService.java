@@ -54,8 +54,8 @@ public class NotificationService extends Service {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       // Creando canal para la notificacion (necesario para api 26 y posteriores)
       String CHANNEL_ID = "full-screen-notification";
-      CharSequence CHANNEL_NAME = "IncomingCall";
-      String CHANNEL_DESCRIPTION = "Llamada entrante";
+      CharSequence CHANNEL_NAME = "Llamada entrante";
+      String CHANNEL_DESCRIPTION = intent.getStringExtra("name") + " - " + intent.getStringExtra("number");
       // Se le asigna IMPORTANCE_HIGH al canal de notificación para que se muestre como emergente para api 26 en adelante
       int CHANNEL_IMPORTANCE = NotificationManager.IMPORTANCE_HIGH;
       final NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, CHANNEL_IMPORTANCE);
