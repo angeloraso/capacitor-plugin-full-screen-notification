@@ -19,6 +19,7 @@ public class FullScreenNotificationPlugin extends Plugin {
     private static PluginCall call;
     private static Context context;
     private static AppCompatActivity app;
+    private static Boolean thereIsANotification = false;
 
     private FullScreenNotification implementation = new FullScreenNotification();
 
@@ -40,17 +41,19 @@ public class FullScreenNotificationPlugin extends Plugin {
         intent.putExtra("icon", FullScreenNotificationPlugin.app.getResources().getIdentifier("icon", "drawable", FullScreenNotificationPlugin.app.getPackageName()));
         if (Build.VERSION.SDK_INT >= 26) {
             FullScreenNotificationPlugin.app.startForegroundService(intent);
+            FullScreenNotificationPlugin.thereIsANotification = true;
         }
     }
 
     @PluginMethod
     public void hide() {
-        if (Build.VERSION.SDK_INT >= 26) {
+        if (Build.VERSION.SDK_INT >= 26 && FullScreenNotificationPlugin.thereIsANotification) {
             NotificationService.that.stopForeground(Service.STOP_FOREGROUND_REMOVE);
         }
     }
 
     public static void answer() {
+        FullScreenNotificationPlugin.thereIsANotification = false;
         JSObject output = new JSObject();
         output.put("data", "answer");
         Intent intent = FullScreenNotificationPlugin.context.getPackageManager().getLaunchIntentForPackage(FullScreenNotificationPlugin.context.getPackageName());
@@ -60,6 +63,7 @@ public class FullScreenNotificationPlugin extends Plugin {
 
 
     public static void discard() {
+        FullScreenNotificationPlugin.thereIsANotification = false;
         JSObject output = new JSObject();
         output.put("data", "discard");
         FullScreenNotificationPlugin.call.resolve(output);
