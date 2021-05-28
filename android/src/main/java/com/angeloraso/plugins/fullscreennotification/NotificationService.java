@@ -29,17 +29,23 @@ public class NotificationService extends Service {
     final Intent notificationIntent = new Intent("android.intent.action.NOTIFICATION_ACTIVITY");
     final Intent discardIntent = new Intent(this, DiscardBroadcast.class);
     final Intent answerIntent = new Intent(this, AnswerBroadcast.class);
+    final Intent finishAndAnswerIntent = new Intent(this, FinishAndAnswerBroadcast.class);
     final Intent tapIntent = new Intent(this, TapBroadcast.class);
 
     final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent discardPendingIntent = PendingIntent.getBroadcast(this, 0, discardIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent answerPendingIntent = PendingIntent.getBroadcast(this, 0, answerIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    final PendingIntent finishAndAnswerPendingIntent = PendingIntent.getBroadcast(this, 0, finishAndAnswerIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent tapPendingIntent = PendingIntent.getBroadcast(this, 0, tapIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
     customView.setTextViewText(intent.getIntExtra("nameText", 0), intent.getStringExtra("name"));
     customView.setTextViewText(intent.getIntExtra("numberText", 0), intent.getStringExtra("number"));
-    customView.setOnClickPendingIntent(intent.getIntExtra("btnAnswer", 0), answerPendingIntent);
-    customView.setOnClickPendingIntent(intent.getIntExtra("btnDiscard", 0), discardPendingIntent);
+    customView.setOnClickPendingIntent(intent.getIntExtra("answerButton", 0), answerPendingIntent);
+    customView.setOnClickPendingIntent(intent.getIntExtra("discardButton", 0), discardPendingIntent);
+
+    if (intent.hasExtra("finishAndAnswerButton")) {
+      customView.setOnClickPendingIntent(intent.getIntExtra("finishAndAnswerButton", 0), finishAndAnswerPendingIntent);
+    }
 
     PowerManager powerManager = (PowerManager) this.getSystemService(POWER_SERVICE);
 

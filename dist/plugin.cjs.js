@@ -10,8 +10,8 @@ const FullScreenNotification = core.registerPlugin('FullScreenNotification', {
 
 // eslint-disable-next-line import/order
 class FullScreenNotificationWeb extends core.WebPlugin {
-    async show(terminal) {
-        return { data: terminal.name };
+    async show(data) {
+        return { data: data.name };
     }
     async hide() {
         return { data: 'success' };

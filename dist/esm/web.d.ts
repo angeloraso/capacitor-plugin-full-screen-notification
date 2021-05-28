@@ -1,9 +1,10 @@
 import { WebPlugin } from '@capacitor/core';
 import type { FullScreenNotificationPlugin } from './definitions';
 export declare class FullScreenNotificationWeb extends WebPlugin implements FullScreenNotificationPlugin {
-    show(terminal: {
+    show(data: {
         name: string;
         number: string;
+        thereIsACallInProgress: boolean;
     }): Promise<{
         data: string;
     }>;

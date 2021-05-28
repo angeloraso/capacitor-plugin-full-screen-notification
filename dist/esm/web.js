@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/order
 import { WebPlugin } from '@capacitor/core';
 export class FullScreenNotificationWeb extends WebPlugin {
-    async show(terminal) {
-        return { data: terminal.name };
+    async show(data) {
+        return { data: data.name };
     }
     async hide() {
         return { data: 'success' };

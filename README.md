@@ -24,12 +24,12 @@ npx cap sync
 ### show(...)
 
 ```typescript
-show(terminal: { name: string; number: string; }) => any
+show(data: { name: string; number: string; thereIsACallInProgress: boolean; }) => any
 ```
 
-| Param          | Type                                           |
-| -------------- | ---------------------------------------------- |
-| **`terminal`** | <code>{ name: string; number: string; }</code> |
+| Param      | Type                                                                            |
+| ---------- | ------------------------------------------------------------------------------- |
+| **`data`** | <code>{ name: string; number: string; thereIsACallInProgress: boolean; }</code> |
 
 **Returns:** <code>any</code>
 

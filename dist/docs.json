@@ -7,12 +7,12 @@
     "methods": [
       {
         "name": "show",
-        "signature": "(terminal: { name: string; number: string; }) => any",
+        "signature": "(data: { name: string; number: string; thereIsACallInProgress: boolean; }) => any",
         "parameters": [
           {
-            "name": "terminal",
+            "name": "data",
             "docs": "",
-            "type": "{ name: string; number: string; }"
+            "type": "{ name: string; number: string; thereIsACallInProgress: boolean; }"
           }
         ],
         "returns": "any",

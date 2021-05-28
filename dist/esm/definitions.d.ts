@@ -1,7 +1,8 @@
 export interface FullScreenNotificationPlugin {
-    show(terminal: {
+    show(data: {
         name: string;
         number: string;
+        thereIsACallInProgress: boolean;
     }): Promise<{
         data: string;
     }>;

@@ -1,21 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.angeloraso.plugins.fullscreennotification">
-    <application  >
-        <activity android:name=".NotificationActivity" android:showOnLockScreen="true">
+
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application>
+        <receiver
+            android:name=".FinishAndAnswerBroadcast"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <activity
+            android:name=".NotificationActivity"
+            android:showOnLockScreen="true">
             <intent-filter>
                 <action android:name="android.intent.action.NOTIFICATION_ACTIVITY" />
             </intent-filter>
         </activity>
-        <service android:name=".NotificationService" android:enabled="true" android:exported="true">
+
+        <service
+            android:name=".NotificationService"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.NOTIFICATION_SERVICE"/>
+                <action android:name="android.intent.action.NOTIFICATION_SERVICE" />
             </intent-filter>
         </service>
-        <receiver android:name=".DiscardBroadcast" android:enabled="true" android:exported="true"/>
-        <receiver android:name=".AnswerBroadcast" android:enabled="true" android:exported="true"/>
-        <receiver android:name=".TapBroadcast" android:enabled="true" android:exported="true"/>
+
+        <receiver
+            android:name=".DiscardBroadcast"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".AnswerBroadcast"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".TapBroadcast"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
-    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 </manifest>

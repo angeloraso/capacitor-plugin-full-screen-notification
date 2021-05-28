@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="@drawable/shape"
+  android:orientation="vertical">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+      android:id="@+id/photo"
+      android:layout_width="70dp"
+      android:layout_height="70dp"
+      android:layout_marginTop="10dp"
+      android:layout_gravity="center"
+      android:contentDescription="App icon"
+      android:src="@drawable/icon" />
+
+    <TextView
+      android:id="@+id/nameText"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:gravity="center"
+      android:textColor="#455346"
+      android:textStyle="bold"
+      android:padding="5dp" />
+
+    <TextView
+      android:id="@+id/numberText"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:textColor="#455346"
+      android:gravity="center"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="20dip"
+    android:paddingTop="20dip"
+    style="?android:attr/buttonBarStyle">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="0.30"
+        android:gravity="center"
+        style="?android:attr/buttonBarStyle">
+
+        <Button
+          android:id="@+id/finishAndAnswerButton"
+          android:layout_width="70dip"
+          android:layout_height="70dip"
+          android:background="@drawable/button"
+          android:backgroundTint="#e07a5f"
+          android:drawableStart="@drawable/call_end"
+          style="?android:attr/borderlessButtonStyle"/>
+
+        <TextView
+            android:id="@+id/finishAndAnswerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="#455346"
+            android:textSize="20dip"
+            android:text="Finalizar y responder"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.30"
+        android:orientation="vertical"
+        android:gravity="center"
+        style="?android:attr/buttonBarStyle">
+
+      <Button
+          android:id="@+id/secondCallDiscardButton"
+          android:layout_width="70dip"
+          android:layout_height="70dip"
+          android:background="@drawable/button"
+          android:backgroundTint="#e76565"
+          android:drawableStart="@drawable/call_end"
+          android:radius="6dp"
+          style="?android:attr/borderlessButtonStyle"/>
+
+      <TextView
+          android:id="@+id/secondCallDiscardText"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:textColor="#455346"
+          android:textSize="20dip"
+          android:text="Rechazar llamada"
+          android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.30"
+        android:orientation="vertical"
+        android:gravity="center"
+        style="?android:attr/buttonBarStyle">
+
+      <Button
+          android:id="@+id/holdAndAnswerButton"
+          android:layout_width="70dip"
+          android:layout_height="70dip"
+          android:background="@drawable/button"
+          android:backgroundTint="#157f1f"
+          android:drawableStart="@drawable/call"
+          android:radius="6dp"
+          style="?android:attr/borderlessButtonStyle"/>
+
+      <TextView
+          android:id="@+id/holdAndAnswerText"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:textColor="#455346"
+          android:textSize="20dip"
+          android:text="En espera y responder"
+          android:gravity="center"/>
+    </LinearLayout>
+
+  </LinearLayout>
+
+</LinearLayout>
