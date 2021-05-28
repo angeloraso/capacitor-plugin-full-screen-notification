@@ -60,9 +60,8 @@ public class FullScreenNotificationPlugin extends Plugin {
         FullScreenNotificationPlugin.thereIsANotification = false;
         JSObject output = new JSObject();
         output.put("data", "answer");
-        Intent intent = FullScreenNotificationPlugin.context.getPackageManager().getLaunchIntentForPackage(FullScreenNotificationPlugin.context.getPackageName());
-        FullScreenNotificationPlugin.app.startActivity(intent);
         FullScreenNotificationPlugin.call.resolve(output);
+        FullScreenNotificationPlugin.openApp();
     }
 
 
@@ -71,6 +70,11 @@ public class FullScreenNotificationPlugin extends Plugin {
         JSObject output = new JSObject();
         output.put("data", "discard");
         FullScreenNotificationPlugin.call.resolve(output);
+    }
+
+    public static void openApp() {
+        Intent intent = FullScreenNotificationPlugin.context.getPackageManager().getLaunchIntentForPackage(FullScreenNotificationPlugin.context.getPackageName());
+        FullScreenNotificationPlugin.app.startActivity(intent);
     }
 
 }

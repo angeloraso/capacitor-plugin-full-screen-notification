@@ -13,6 +13,7 @@
         </service>
         <receiver android:name=".DiscardBroadcast" android:enabled="true" android:exported="true"/>
         <receiver android:name=".AnswerBroadcast" android:enabled="true" android:exported="true"/>
+        <receiver android:name=".TapBroadcast" android:enabled="true" android:exported="true"/>
     </application>
 
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />

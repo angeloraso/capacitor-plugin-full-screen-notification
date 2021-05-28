@@ -29,10 +29,12 @@ public class NotificationService extends Service {
     final Intent notificationIntent = new Intent("android.intent.action.NOTIFICATION_ACTIVITY");
     final Intent discardIntent = new Intent(this, DiscardBroadcast.class);
     final Intent answerIntent = new Intent(this, AnswerBroadcast.class);
+    final Intent tapIntent = new Intent(this, TapBroadcast.class);
 
     final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent discardPendingIntent = PendingIntent.getBroadcast(this, 0, discardIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent answerPendingIntent = PendingIntent.getBroadcast(this, 0, answerIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    final PendingIntent tapPendingIntent = PendingIntent.getBroadcast(this, 0, tapIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
     customView.setTextViewText(intent.getIntExtra("nameText", 0), intent.getStringExtra("name"));
     customView.setTextViewText(intent.getIntExtra("numberText", 0), intent.getStringExtra("number"));
@@ -58,8 +60,11 @@ public class NotificationService extends Service {
       String CHANNEL_DESCRIPTION = intent.getStringExtra("name") + " - " + intent.getStringExtra("number");
       // Se le asigna IMPORTANCE_HIGH al canal de notificación para que se muestre como emergente para api 26 en adelante
       int CHANNEL_IMPORTANCE = NotificationManager.IMPORTANCE_HIGH;
+      final long[] DEFAULT_VIBRATE_PATTERN = {0, 250, 250, 250};
       final NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, CHANNEL_IMPORTANCE);
       notificationChannel.setDescription(CHANNEL_DESCRIPTION);
+      notificationChannel.enableVibration(true);
+      notificationChannel.setVibrationPattern(DEFAULT_VIBRATE_PATTERN);
       notificationChannel.setSound(Settings.System.DEFAULT_NOTIFICATION_URI, null);
       // Register the channel with the system; you can't change the importance
       // or other notification behaviors after this
@@ -76,14 +81,16 @@ public class NotificationService extends Service {
       notification.setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND);
       // Para saber si es necesario molestar al usuario con una notificación a pesar de tener activado el modo "No interrumpir"
       notification.setCategory(NotificationCompat.CATEGORY_CALL);
-      final long[] DEFAULT_VIBRATE_PATTERN = {0, 250, 250, 250};
       notification.setVibrate(DEFAULT_VIBRATE_PATTERN);
       notification.setLights(Color.WHITE, 2000, 3000);
       notification.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
       // VISIBILITY_PUBLIC muestra el contenido completo de la notificación
       notification.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
       notification.setOngoing(true);
-      notification.setAutoCancel(true);
+      // Specifies a duration in milliseconds after which this notification should be canceled, if it is not already canceled.
+      notification.setTimeoutAfter(90000);
+      // Supply a PendingIntent to be sent when the notification is clicked.
+      notification.setContentIntent(tapPendingIntent);
       notification.setFullScreenIntent(pendingIntent, true);
       // Se le asigna PRIORITY_HIGH a la notificación para que se muestre como emergente para api 25 y anteriores
       notification.setPriority(NotificationCompat.PRIORITY_HIGH);
