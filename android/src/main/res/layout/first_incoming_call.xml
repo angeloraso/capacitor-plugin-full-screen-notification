@@ -2,7 +2,7 @@
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content"
+  android:layout_height="330dip"
   android:background="@drawable/shape"
   android:orientation="vertical">
 
@@ -27,6 +27,7 @@
       android:layout_marginTop="10dp"
       android:gravity="center"
       android:textColor="#455346"
+      android:textSize="20dip"
       android:textStyle="bold"
       android:padding="5dp" />
 
@@ -35,6 +36,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"
+      android:textSize="15dip"
       android:textColor="#455346"
       android:gravity="center"/>
 
@@ -57,7 +59,7 @@
         style="?android:attr/buttonBarStyle">
 
         <Button
-          android:id="@+id/btnDiscard"
+          android:id="@+id/discardButton"
           android:layout_width="70dip"
           android:layout_height="70dip"
           android:background="@drawable/button"
@@ -85,7 +87,7 @@
         style="?android:attr/buttonBarStyle">
 
       <Button
-          android:id="@+id/btnAnswer"
+          android:id="@+id/answerButton"
           android:layout_width="70dip"
           android:layout_height="70dip"
           android:background="@drawable/button"
