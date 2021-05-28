@@ -36,14 +36,16 @@ public class FullScreenNotificationPlugin extends Plugin {
         intent.putExtra("number", call.getString("number"));
         intent.putExtra("nameText", FullScreenNotificationPlugin.app.getResources().getIdentifier("nameText", "id", FullScreenNotificationPlugin.app.getPackageName()));
         intent.putExtra("numberText", FullScreenNotificationPlugin.app.getResources().getIdentifier("numberText", "id", FullScreenNotificationPlugin.app.getPackageName()));
-        intent.putExtra("answerButton", FullScreenNotificationPlugin.app.getResources().getIdentifier("answerButton", "id", FullScreenNotificationPlugin.app.getPackageName()));
-        intent.putExtra("discardButton", FullScreenNotificationPlugin.app.getResources().getIdentifier("discardButton", "id", FullScreenNotificationPlugin.app.getPackageName()));
 
         final Boolean thereIsACallInProgress = call.getBoolean("thereIsACallInProgress");
         if (!thereIsACallInProgress) {
             intent.putExtra("activity_notification", FullScreenNotificationPlugin.app.getResources().getIdentifier("first_incoming_call", "layout", FullScreenNotificationPlugin.app.getPackageName()));
+            intent.putExtra("answerButton", FullScreenNotificationPlugin.app.getResources().getIdentifier("answerButton", "id", FullScreenNotificationPlugin.app.getPackageName()));
+            intent.putExtra("discardButton", FullScreenNotificationPlugin.app.getResources().getIdentifier("discardButton", "id", FullScreenNotificationPlugin.app.getPackageName()));
         } else {
             intent.putExtra("activity_notification", FullScreenNotificationPlugin.app.getResources().getIdentifier("second_incoming_call", "layout", FullScreenNotificationPlugin.app.getPackageName()));
+            intent.putExtra("answerButton", FullScreenNotificationPlugin.app.getResources().getIdentifier("holdAndAnswerButton", "id", FullScreenNotificationPlugin.app.getPackageName()));
+            intent.putExtra("discardButton", FullScreenNotificationPlugin.app.getResources().getIdentifier("secondCallDiscardText", "id", FullScreenNotificationPlugin.app.getPackageName()));
             intent.putExtra("finishAndAnswerButton", FullScreenNotificationPlugin.app.getResources().getIdentifier("finishAndAnswerButton", "id", FullScreenNotificationPlugin.app.getPackageName()));
         }
 
