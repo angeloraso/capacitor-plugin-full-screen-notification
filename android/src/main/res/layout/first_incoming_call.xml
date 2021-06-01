@@ -2,7 +2,7 @@
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="330dip"
+  android:layout_height="370dip"
   android:background="@drawable/shape"
   android:orientation="vertical">
 
@@ -46,7 +46,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingBottom="20dip"
     android:paddingTop="20dip"
     style="?android:attr/buttonBarStyle">
 
