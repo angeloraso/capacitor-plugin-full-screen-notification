@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="370dip"
-  android:background="@drawable/shape"
-  android:orientation="vertical">
-
-  <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="370dip"
+    android:background="@drawable/shape"
     android:orientation="vertical">
 
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
     <ImageView
-      android:id="@+id/icon"
-      android:layout_width="70dp"
-      android:layout_height="70dp"
-      android:layout_marginTop="10dp"
-      android:layout_gravity="center"
-      android:contentDescription="App icon"
-      android:src="@drawable/icon" />
+        android:id="@+id/icon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:contentDescription="App icon"
+        android:src="@drawable/icon" />
 
     <TextView
-      android:id="@+id/callerNameId"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="10dp"
-      android:gravity="center"
-      android:textColor="#455346"
-      android:textSize="20dip"
-      android:textStyle="bold"
-      android:padding="5dp" />
+        android:id="@+id/callerNameId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="#455346"
+        android:textSize="20dip"
+        android:textStyle="bold"
+        android:padding="5dp" />
 
     <TextView
-      android:id="@+id/callerNumberId"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
-      android:textSize="15dip"
-      android:textColor="#455346"
-      android:gravity="center"/>
+        android:id="@+id/callerNumberId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="15dip"
+        android:textColor="#455346"
+        android:gravity="center"/>
 
   </LinearLayout>
 
   <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingTop="20dip"
-    style="?android:attr/buttonBarStyle">
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingTop="20dip"
+      style="?android:attr/buttonBarStyle">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -57,41 +57,52 @@
         android:gravity="center"
         style="?android:attr/buttonBarStyle">
 
-        <Button
-          android:id="@+id/finishAndAnswerButton"
-          android:layout_width="70dip"
-          android:layout_height="70dip"
+      <Button
+          android:id="@+id/finishAndAnswerBackButtonId"
+          android:layout_width="45dip"
+          android:layout_height="45dip"
           android:background="@drawable/button"
-          android:backgroundTint="#e07a5f"
-          android:drawableStart="@drawable/call_end"
+          android:backgroundTint="#e76565"
+          android:drawableStart="@drawable/decline_24"
+          style="?android:attr/borderlessButtonStyle"/>
+      <Button
+          android:id="@+id/finishAndAnswerFrontButtonId"
+          android:layout_width="50dip"
+          android:layout_height="50dip"
+          android:translationX="25dip"
+          android:translationY="-25dip"
+          android:background="@drawable/button"
+          android:backgroundTint="#157f1f"
+          android:drawableStart="@drawable/answer_24"
           style="?android:attr/borderlessButtonStyle"/>
 
-        <TextView
-            android:id="@+id/finishAndAnswerButtonTextId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="#455346"
-            android:textSize="20dip"
-            android:gravity="center"/>
+      <TextView
+          android:id="@+id/finishAndAnswerButtonTextId"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:textColor="#455346"
+          android:textSize="20dip"
+          android:gravity="center"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.30"
+        android:layout_weight="0.40"
         android:orientation="vertical"
         android:gravity="center"
         style="?android:attr/buttonBarStyle">
 
       <Button
-          android:id="@+id/declineSecondCallButton"
-          android:layout_width="70dip"
-          android:layout_height="70dip"
+          android:id="@+id/declineSecondCallButtonId"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:minHeight="70dip"
+          android:minWidth="70dip"
           android:background="@drawable/button"
           android:backgroundTint="#e76565"
-          android:drawableStart="@drawable/call_end"
-          android:radius="6dp"
+          android:drawableStart="@drawable/decline_54"
           style="?android:attr/borderlessButtonStyle"/>
 
       <TextView
@@ -113,13 +124,22 @@
         style="?android:attr/buttonBarStyle">
 
       <Button
-          android:id="@+id/holdAndAnswerButton"
-          android:layout_width="70dip"
-          android:layout_height="70dip"
+          android:id="@+id/holdAndAnswerBackButtonId"
+          android:layout_width="45dip"
+          android:layout_height="45dip"
+          android:background="@drawable/button"
+          android:backgroundTint="#2b94f4"
+          android:drawableStart="@drawable/hold_24"
+          style="?android:attr/borderlessButtonStyle"/>
+      <Button
+          android:id="@+id/holdAndAnswerFrontButtonId"
+          android:layout_width="45dip"
+          android:layout_height="45dip"
+          android:translationX="25dip"
+          android:translationY="-25dip"
           android:background="@drawable/button"
           android:backgroundTint="#157f1f"
-          android:drawableStart="@drawable/call"
-          android:radius="6dp"
+          android:drawableStart="@drawable/answer_24"
           style="?android:attr/borderlessButtonStyle"/>
 
       <TextView

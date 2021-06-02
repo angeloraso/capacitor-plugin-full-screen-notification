@@ -47,9 +47,11 @@ public class NotificationService extends Service {
       customView.setTextViewText(intent.getIntExtra("declineButtonTextId", 0), intent.getStringExtra("declineButtonText"));
       customView.setTextViewText(intent.getIntExtra("answerButtonTextId", 0), intent.getStringExtra("answerButtonText"));
     } else {
-      customView.setOnClickPendingIntent(intent.getIntExtra("terminateButton", 0), terminatePendingIntent);
+      customView.setOnClickPendingIntent(intent.getIntExtra("finishAndAnswerBackButton", 0), terminatePendingIntent);
+      customView.setOnClickPendingIntent(intent.getIntExtra("finishAndAnswerFrontButton", 0), terminatePendingIntent);
       customView.setOnClickPendingIntent(intent.getIntExtra("declineButton", 0), declinePendingIntent);
-      customView.setOnClickPendingIntent(intent.getIntExtra("answerButton", 0), answerPendingIntent);
+      customView.setOnClickPendingIntent(intent.getIntExtra("holdAndAnswerBackButtonId", 0), answerPendingIntent);
+      customView.setOnClickPendingIntent(intent.getIntExtra("holdAndAnswerFrontButtonId", 0), answerPendingIntent);
       customView.setTextViewText(intent.getIntExtra("finishAndAnswerButtonTextId", 0), intent.getStringExtra("finishAndAnswerButtonText"));
       customView.setTextViewText(intent.getIntExtra("declineSecondCallButtonTextId", 0), intent.getStringExtra("declineSecondCallButtonText"));
       customView.setTextViewText(intent.getIntExtra("holdAndAnswerButtonTextId", 0), intent.getStringExtra("holdAndAnswerButtonText"));
