@@ -7,10 +7,21 @@
 
     <application>
         <receiver
-            android:name=".NotificationReceiver"
+            android:name=".DeclineReceiver"
             android:enabled="true"
-            android:exported="true">
-        </receiver>
+            android:exported="true"></receiver>
+        <receiver
+            android:name=".TapReceiver"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".TerminateReceiver"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".AnswerReceiver"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity
             android:name=".NotificationActivity"

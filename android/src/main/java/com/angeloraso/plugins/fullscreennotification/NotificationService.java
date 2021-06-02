@@ -27,14 +27,10 @@ public class NotificationService extends Service {
     NotificationService.that = this;
     final RemoteViews customView = new RemoteViews(intent.getPackage(), intent.getIntExtra("activity_notification", 0));
     final Intent notificationIntent = new Intent("android.intent.action.NOTIFICATION_ACTIVITY");
-    final Intent declineIntent = new Intent(this, NotificationReceiver.class);
-    declineIntent.putExtra("action", "decline");
-    final Intent answerIntent = new Intent(this, NotificationReceiver.class);
-    answerIntent.putExtra("action", "answer");
-    final Intent terminateIntent = new Intent(this, NotificationReceiver.class);
-    terminateIntent.putExtra("action", "terminate");
-    final Intent tapIntent = new Intent(this, NotificationReceiver.class);
-    tapIntent.putExtra("action", "tap");
+    final Intent declineIntent = new Intent(this, DeclineReceiver.class);
+    final Intent answerIntent = new Intent(this, AnswerReceiver.class);
+    final Intent terminateIntent = new Intent(this, TerminateReceiver.class);
+    final Intent tapIntent = new Intent(this, TapReceiver.class);
 
     final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent declinePendingIntent = PendingIntent.getBroadcast(this, 0, declineIntent, PendingIntent.FLAG_UPDATE_CURRENT);
