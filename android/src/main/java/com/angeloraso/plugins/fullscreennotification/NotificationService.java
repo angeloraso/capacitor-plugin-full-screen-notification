@@ -42,21 +42,21 @@ public class NotificationService extends Service {
     final PendingIntent terminatePendingIntent = PendingIntent.getBroadcast(this, 0, terminateIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent tapPendingIntent = PendingIntent.getBroadcast(this, 0, tapIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-    customView.setTextViewText(intent.getIntExtra("nameText", 0), intent.getStringExtra("callerName"));
-    customView.setTextViewText(intent.getIntExtra("numberText", 0), intent.getStringExtra("callerNumber"));
+    customView.setTextViewText(intent.getIntExtra("callerNameId", 0), intent.getStringExtra("callerName"));
+    customView.setTextViewText(intent.getIntExtra("callerNumberId", 0), intent.getStringExtra("callerNumber"));
 
     if (!intent.hasExtra("finishAndAnswerButton")) {
       customView.setOnClickPendingIntent(intent.getIntExtra("declineButton", 0), declinePendingIntent);
       customView.setOnClickPendingIntent(intent.getIntExtra("answerButton", 0), answerPendingIntent);
-      customView.setTextViewText(intent.getIntExtra("declineButtonText", 0), intent.getStringExtra("declineButtonText"));
-      customView.setTextViewText(intent.getIntExtra("answerButtonText", 0), intent.getStringExtra("answerButtonText"));
+      customView.setTextViewText(intent.getIntExtra("declineButtonTextId", 0), intent.getStringExtra("declineButtonText"));
+      customView.setTextViewText(intent.getIntExtra("answerButtonTextId", 0), intent.getStringExtra("answerButtonText"));
     } else {
       customView.setOnClickPendingIntent(intent.getIntExtra("terminateButton", 0), terminatePendingIntent);
       customView.setOnClickPendingIntent(intent.getIntExtra("declineButton", 0), declinePendingIntent);
       customView.setOnClickPendingIntent(intent.getIntExtra("answerButton", 0), answerPendingIntent);
-      customView.setTextViewText(intent.getIntExtra("finishAndAnswerButtonText", 0), intent.getStringExtra("finishAndAnswerButtonText"));
-      customView.setTextViewText(intent.getIntExtra("declineSecondCallButtonText", 0), intent.getStringExtra("declineSecondCallButtonText"));
-      customView.setTextViewText(intent.getIntExtra("holdAndAnswerButtonText", 0), intent.getStringExtra("holdAndAnswerButtonText"));
+      customView.setTextViewText(intent.getIntExtra("finishAndAnswerButtonTextId", 0), intent.getStringExtra("finishAndAnswerButtonText"));
+      customView.setTextViewText(intent.getIntExtra("declineSecondCallButtonTextId", 0), intent.getStringExtra("declineSecondCallButtonText"));
+      customView.setTextViewText(intent.getIntExtra("holdAndAnswerButtonTextId", 0), intent.getStringExtra("holdAndAnswerButtonText"));
     }
 
     PowerManager powerManager = (PowerManager) this.getSystemService(POWER_SERVICE);

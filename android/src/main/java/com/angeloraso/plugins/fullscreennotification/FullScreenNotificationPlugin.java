@@ -30,11 +30,11 @@ public class FullScreenNotificationPlugin extends Plugin {
         intent.setPackage(FullScreenNotificationPlugin.app.getPackageName());
         intent.putExtra("icon", FullScreenNotificationPlugin.app.getResources().getIdentifier("icon", "drawable", FullScreenNotificationPlugin.app.getPackageName()));
 
-        intent.putExtra("nameText",  this.getLayoutElementId("nameText"));
+        intent.putExtra("callerNameId",  this.getLayoutElementId("callerNameId"));
         String callerName = call.hasOption("callerName") ? call.getString("callerName") : "Unknow";
         intent.putExtra("callerName", callerName);
 
-        intent.putExtra("numberText", this.getLayoutElementId("numberText"));
+        intent.putExtra("callerNumberId", this.getLayoutElementId("callerNumberId"));
         String callerNumber = call.hasOption("callerNumber") ? call.getString("callerNumber") : "Unknow";
         intent.putExtra("callerNumber", callerNumber);
 
@@ -44,8 +44,11 @@ public class FullScreenNotificationPlugin extends Plugin {
             intent.putExtra("declineButton", this.getLayoutElementId("declineButton"));
             intent.putExtra("answerButton", this.getLayoutElementId("answerButton"));
 
+            intent.putExtra("declineButtonTextId", this.getLayoutElementId("declineButtonText"));
             String declineButtonText = call.hasOption("declineButtonText") ? call.getString("declineButtonText") : "Decline";
             intent.putExtra("declineButtonText", declineButtonText);
+
+            intent.putExtra("answerButtonTextId", this.getLayoutElementId("answerButtonText"));
             String answerButtonText = call.hasOption("answerButtonText") ? call.getString("answerButtonText") : "Answer";
             intent.putExtra("answerButtonText", answerButtonText);
         } else {
@@ -54,10 +57,15 @@ public class FullScreenNotificationPlugin extends Plugin {
             intent.putExtra("declineButton", this.getLayoutElementId("declineSecondCallButton"));
             intent.putExtra("answerButton", this.getLayoutElementId("holdAndAnswerButton"));
 
+            intent.putExtra("finishAndAnswerButtonTextId", this.getLayoutElementId("declineButtonText"));
             String finishAndAnswerButtonText = call.hasOption("finishAndAnswerButtonText") ? call.getString("finishAndAnswerButtonText") : "Finish and answer";
             intent.putExtra("finishAndAnswerButtonText", finishAndAnswerButtonText);
+
+            intent.putExtra("declineSecondCallButtonTextId", this.getLayoutElementId("declineButtonText"));
             String declineSecondCallButtonText = call.hasOption("declineSecondCallButtonText") ? call.getString("declineSecondCallButtonText") : "Decline";
             intent.putExtra("declineSecondCallButtonText", declineSecondCallButtonText);
+
+            intent.putExtra("holdAndAnswerButtonTextId", this.getLayoutElementId("declineButtonText"));
             String holdAndAnswerButtonText = call.hasOption("holdAndAnswerButtonText") ? call.getString("holdAndAnswerButtonText") : "Hold and answer";
             intent.putExtra("holdAndAnswerButtonText", holdAndAnswerButtonText);
         }

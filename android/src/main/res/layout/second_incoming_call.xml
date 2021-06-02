@@ -12,7 +12,7 @@
     android:orientation="vertical">
 
     <ImageView
-      android:id="@+id/photo"
+      android:id="@+id/icon"
       android:layout_width="70dp"
       android:layout_height="70dp"
       android:layout_marginTop="10dp"
@@ -21,7 +21,7 @@
       android:src="@drawable/icon" />
 
     <TextView
-      android:id="@+id/nameText"
+      android:id="@+id/callerNameId"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="10dp"
@@ -32,7 +32,7 @@
       android:padding="5dp" />
 
     <TextView
-      android:id="@+id/numberText"
+      android:id="@+id/callerNumberId"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"
@@ -67,7 +67,7 @@
           style="?android:attr/borderlessButtonStyle"/>
 
         <TextView
-            android:id="@+id/finishAndAnswerButtonText"
+            android:id="@+id/finishAndAnswerButtonTextId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -95,7 +95,7 @@
           style="?android:attr/borderlessButtonStyle"/>
 
       <TextView
-          android:id="@+id/declineSecondCallButtonText"
+          android:id="@+id/declineSecondCallButtonTextId"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
@@ -123,7 +123,7 @@
           style="?android:attr/borderlessButtonStyle"/>
 
       <TextView
-          android:id="@+id/holdAndAnswerButtonText"
+          android:id="@+id/holdAndAnswerButtonTextId"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
