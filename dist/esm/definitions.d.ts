@@ -1,8 +1,14 @@
 export interface FullScreenNotificationPlugin {
     show(data: {
-        name: string;
-        number: string;
+        callerName: string;
+        callerNumber: string;
         thereIsACallInProgress: boolean;
+        declineButtonText: string;
+        answerButtonText: string;
+        finishAndAnswerButtonText: string;
+        declineSecondCallButtonText: string;
+        holdAndAnswerButtonText: string;
+        icon: string;
     }): Promise<{
         data: string;
     }>;

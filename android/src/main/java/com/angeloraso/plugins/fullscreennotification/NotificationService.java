@@ -27,24 +27,36 @@ public class NotificationService extends Service {
     NotificationService.that = this;
     final RemoteViews customView = new RemoteViews(intent.getPackage(), intent.getIntExtra("activity_notification", 0));
     final Intent notificationIntent = new Intent("android.intent.action.NOTIFICATION_ACTIVITY");
-    final Intent discardIntent = new Intent(this, DiscardBroadcast.class);
-    final Intent answerIntent = new Intent(this, AnswerBroadcast.class);
-    final Intent finishAndAnswerIntent = new Intent(this, FinishAndAnswerBroadcast.class);
-    final Intent tapIntent = new Intent(this, TapBroadcast.class);
+    final Intent declineIntent = new Intent(this, NotificationReceiver.class);
+    declineIntent.putExtra("action", "decline");
+    final Intent answerIntent = new Intent(this, NotificationReceiver.class);
+    answerIntent.putExtra("action", "answer");
+    final Intent terminateIntent = new Intent(this, NotificationReceiver.class);
+    terminateIntent.putExtra("action", "terminate");
+    final Intent tapIntent = new Intent(this, NotificationReceiver.class);
+    tapIntent.putExtra("action", "tap");
 
     final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-    final PendingIntent discardPendingIntent = PendingIntent.getBroadcast(this, 0, discardIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    final PendingIntent declinePendingIntent = PendingIntent.getBroadcast(this, 0, declineIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent answerPendingIntent = PendingIntent.getBroadcast(this, 0, answerIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-    final PendingIntent finishAndAnswerPendingIntent = PendingIntent.getBroadcast(this, 0, finishAndAnswerIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    final PendingIntent terminatePendingIntent = PendingIntent.getBroadcast(this, 0, terminateIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent tapPendingIntent = PendingIntent.getBroadcast(this, 0, tapIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-    customView.setTextViewText(intent.getIntExtra("nameText", 0), intent.getStringExtra("name"));
-    customView.setTextViewText(intent.getIntExtra("numberText", 0), intent.getStringExtra("number"));
-    customView.setOnClickPendingIntent(intent.getIntExtra("answerButton", 0), answerPendingIntent);
-    customView.setOnClickPendingIntent(intent.getIntExtra("discardButton", 0), discardPendingIntent);
+    customView.setTextViewText(intent.getIntExtra("nameText", 0), intent.getStringExtra("callerName"));
+    customView.setTextViewText(intent.getIntExtra("numberText", 0), intent.getStringExtra("callerNumber"));
 
-    if (intent.hasExtra("finishAndAnswerButton")) {
-      customView.setOnClickPendingIntent(intent.getIntExtra("finishAndAnswerButton", 0), finishAndAnswerPendingIntent);
+    if (!intent.hasExtra("finishAndAnswerButton")) {
+      customView.setOnClickPendingIntent(intent.getIntExtra("declineButton", 0), declinePendingIntent);
+      customView.setOnClickPendingIntent(intent.getIntExtra("answerButton", 0), answerPendingIntent);
+      customView.setTextViewText(intent.getIntExtra("declineButtonText", 0), intent.getStringExtra("declineButtonText"));
+      customView.setTextViewText(intent.getIntExtra("answerButtonText", 0), intent.getStringExtra("answerButtonText"));
+    } else {
+      customView.setOnClickPendingIntent(intent.getIntExtra("terminateButton", 0), terminatePendingIntent);
+      customView.setOnClickPendingIntent(intent.getIntExtra("declineButton", 0), declinePendingIntent);
+      customView.setOnClickPendingIntent(intent.getIntExtra("answerButton", 0), answerPendingIntent);
+      customView.setTextViewText(intent.getIntExtra("finishAndAnswerButtonText", 0), intent.getStringExtra("finishAndAnswerButtonText"));
+      customView.setTextViewText(intent.getIntExtra("declineSecondCallButtonText", 0), intent.getStringExtra("declineSecondCallButtonText"));
+      customView.setTextViewText(intent.getIntExtra("holdAndAnswerButtonText", 0), intent.getStringExtra("holdAndAnswerButtonText"));
     }
 
     PowerManager powerManager = (PowerManager) this.getSystemService(POWER_SERVICE);

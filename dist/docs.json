@@ -7,12 +7,12 @@
     "methods": [
       {
         "name": "show",
-        "signature": "(data: { name: string; number: string; thereIsACallInProgress: boolean; }) => any",
+        "signature": "(data: { callerName: string; callerNumber: string; thereIsACallInProgress: boolean; declineButtonText: string; answerButtonText: string; finishAndAnswerButtonText: string; declineSecondCallButtonText: string; holdAndAnswerButtonText: string; icon: string; }) => any",
         "parameters": [
           {
             "name": "data",
             "docs": "",
-            "type": "{ name: string; number: string; thereIsACallInProgress: boolean; }"
+            "type": "{ callerName: string; callerNumber: string; thereIsACallInProgress: boolean; declineButtonText: string; answerButtonText: string; finishAndAnswerButtonText: string; declineSecondCallButtonText: string; holdAndAnswerButtonText: string; icon: string; }"
           }
         ],
         "returns": "any",

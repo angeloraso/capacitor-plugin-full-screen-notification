@@ -7,9 +7,10 @@
 
     <application>
         <receiver
-            android:name=".FinishAndAnswerBroadcast"
+            android:name=".NotificationReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true">
+        </receiver>
 
         <activity
             android:name=".NotificationActivity"
@@ -27,19 +28,6 @@
                 <action android:name="android.intent.action.NOTIFICATION_SERVICE" />
             </intent-filter>
         </service>
-
-        <receiver
-            android:name=".DiscardBroadcast"
-            android:enabled="true"
-            android:exported="true" />
-        <receiver
-            android:name=".AnswerBroadcast"
-            android:enabled="true"
-            android:exported="true" />
-        <receiver
-            android:name=".TapBroadcast"
-            android:enabled="true"
-            android:exported="true" />
     </application>
 
 </manifest>

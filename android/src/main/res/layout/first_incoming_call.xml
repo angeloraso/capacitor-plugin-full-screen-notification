@@ -58,7 +58,7 @@
         style="?android:attr/buttonBarStyle">
 
         <Button
-          android:id="@+id/discardButton"
+          android:id="@+id/declineButton"
           android:layout_width="70dip"
           android:layout_height="70dip"
           android:background="@drawable/button"
@@ -67,13 +67,12 @@
           style="?android:attr/borderlessButtonStyle"/>
 
         <TextView
-            android:id="@+id/discardText"
+            android:id="@+id/declineButtonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textColor="#455346"
             android:textSize="20dip"
-            android:text="Rechazar"
             android:gravity="center"/>
     </LinearLayout>
 
@@ -96,13 +95,12 @@
           style="?android:attr/borderlessButtonStyle"/>
 
       <TextView
-          android:id="@+id/answerText"
+          android:id="@+id/answerButtonText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
           android:textColor="#455346"
           android:textSize="20dip"
-          android:text="Responder"
           android:gravity="center"/>
     </LinearLayout>
 

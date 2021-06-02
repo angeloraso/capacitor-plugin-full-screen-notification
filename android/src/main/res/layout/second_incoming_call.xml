@@ -67,13 +67,12 @@
           style="?android:attr/borderlessButtonStyle"/>
 
         <TextView
-            android:id="@+id/finishAndAnswerText"
+            android:id="@+id/finishAndAnswerButtonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textColor="#455346"
             android:textSize="20dip"
-            android:text="Finalizar y responder"
             android:gravity="center"/>
     </LinearLayout>
 
@@ -86,7 +85,7 @@
         style="?android:attr/buttonBarStyle">
 
       <Button
-          android:id="@+id/secondCallDiscardButton"
+          android:id="@+id/declineSecondCallButton"
           android:layout_width="70dip"
           android:layout_height="70dip"
           android:background="@drawable/button"
@@ -96,13 +95,12 @@
           style="?android:attr/borderlessButtonStyle"/>
 
       <TextView
-          android:id="@+id/secondCallDiscardText"
+          android:id="@+id/declineSecondCallButtonText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
           android:textColor="#455346"
           android:textSize="20dip"
-          android:text="Rechazar llamada"
           android:gravity="center"/>
     </LinearLayout>
 
@@ -125,13 +123,12 @@
           style="?android:attr/borderlessButtonStyle"/>
 
       <TextView
-          android:id="@+id/holdAndAnswerText"
+          android:id="@+id/holdAndAnswerButtonText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
           android:textColor="#455346"
           android:textSize="20dip"
-          android:text="En espera y responder"
           android:gravity="center"/>
     </LinearLayout>
 

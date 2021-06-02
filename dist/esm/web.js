@@ -2,7 +2,7 @@
 import { WebPlugin } from '@capacitor/core';
 export class FullScreenNotificationWeb extends WebPlugin {
     async show(data) {
-        return { data: data.name };
+        return { data: data.callerName };
     }
     async hide() {
         return { data: 'success' };
