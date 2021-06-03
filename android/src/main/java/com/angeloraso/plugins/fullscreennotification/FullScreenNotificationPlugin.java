@@ -89,14 +89,14 @@ public class FullScreenNotificationPlugin extends Plugin {
 
     @PluginMethod
     public void hide(PluginCall call) {
-      FullScreenNotificationPlugin.dismissNotification();
-      JSObject output = new JSObject();
-      output.put("data", "success");
-      call.resolve(output);
+        FullScreenNotificationPlugin.dismissNotification();
+        JSObject output = new JSObject();
+        output.put("data", "success");
+        call.resolve(output);
     }
 
     public static void notificationAction(String action) {
-      FullScreenNotificationPlugin.dismissNotification();
+        FullScreenNotificationPlugin.dismissNotification();
         boolean validAction = true;
         JSObject output = new JSObject();
 
@@ -133,12 +133,12 @@ public class FullScreenNotificationPlugin extends Plugin {
     }
 
     private static void dismissNotification() {
-      if (Build.VERSION.SDK_INT >= 26 && NotificationService.that != null) {
-        NotificationManager notifManager = (NotificationManager) FullScreenNotificationPlugin.context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notifManager.cancelAll();
-        NotificationService.that.stopForeground(FullScreenNotificationPlugin.thereIsANotification);
-        FullScreenNotificationPlugin.thereIsANotification = false;
-      }
+        if (Build.VERSION.SDK_INT >= 26 && NotificationService.that != null) {
+            NotificationManager notifManager = (NotificationManager) FullScreenNotificationPlugin.context.getSystemService(Context.NOTIFICATION_SERVICE);
+            notifManager.cancelAll();
+            NotificationService.that.stopForeground(FullScreenNotificationPlugin.thereIsANotification);
+            FullScreenNotificationPlugin.thereIsANotification = false;
+        }
     }
 
 }
