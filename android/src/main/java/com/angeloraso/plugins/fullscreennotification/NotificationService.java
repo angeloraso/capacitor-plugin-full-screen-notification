@@ -19,6 +19,7 @@ import androidx.core.app.NotificationCompat;
 public class NotificationService extends Service {
 
   public static Service that = null;
+  public static int notificationId = 0;
 
   @Override
   public int onStartCommand (Intent intent, int flags, int startId) {
@@ -91,8 +92,6 @@ public class NotificationService extends Service {
       // VISIBILITY_PUBLIC displays the full content of the notification
       notification.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
       notification.setOngoing(true);
-      // Specifies a duration in milliseconds after which this notification should be canceled, if it is not already canceled.
-      notification.setTimeoutAfter(90000);
       // Supply a PendingIntent to be sent when the notification is clicked.
       notification.setContentIntent(tapPendingIntent);
       notification.setFullScreenIntent(pendingIntent, true);
@@ -101,7 +100,7 @@ public class NotificationService extends Service {
       notification.setCustomContentView(customView);
       notification.setCustomBigContentView(customView);
 
-      startForeground(1234, notification.build());
+      startForeground(NotificationService.notificationId++, notification.build());
     }
 
     return flags;

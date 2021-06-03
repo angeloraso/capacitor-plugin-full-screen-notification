@@ -1,5 +1,6 @@
 package com.angeloraso.plugins.fullscreennotification;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -88,16 +89,14 @@ public class FullScreenNotificationPlugin extends Plugin {
 
     @PluginMethod
     public void hide(PluginCall call) {
-        if (Build.VERSION.SDK_INT >= 26 && NotificationService.that != null) {
-            NotificationService.that.stopForeground(FullScreenNotificationPlugin.thereIsANotification);
-            FullScreenNotificationPlugin.thereIsANotification = false;
-        }
-        JSObject output = new JSObject();
-        output.put("data", "success");
-        call.resolve(output);
+      FullScreenNotificationPlugin.dismissNotification();
+      JSObject output = new JSObject();
+      output.put("data", "success");
+      call.resolve(output);
     }
 
     public static void notificationAction(String action) {
+      FullScreenNotificationPlugin.dismissNotification();
         boolean validAction = true;
         JSObject output = new JSObject();
 
@@ -131,6 +130,15 @@ public class FullScreenNotificationPlugin extends Plugin {
     public static void openApp() {
         Intent intent = FullScreenNotificationPlugin.context.getPackageManager().getLaunchIntentForPackage(FullScreenNotificationPlugin.context.getPackageName());
         FullScreenNotificationPlugin.app.startActivity(intent);
+    }
+
+    private static void dismissNotification() {
+      if (Build.VERSION.SDK_INT >= 26 && NotificationService.that != null) {
+        NotificationManager notifManager = (NotificationManager) FullScreenNotificationPlugin.context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notifManager.cancelAll();
+        NotificationService.that.stopForeground(FullScreenNotificationPlugin.thereIsANotification);
+        FullScreenNotificationPlugin.thereIsANotification = false;
+      }
     }
 
 }
