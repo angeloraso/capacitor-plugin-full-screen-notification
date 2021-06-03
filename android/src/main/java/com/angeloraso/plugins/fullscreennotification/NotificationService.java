@@ -10,9 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.IBinder;
-import android.os.PowerManager;
 import android.provider.Settings;
-import android.view.WindowManager;
 import android.widget.RemoteViews;
 
 import androidx.annotation.Nullable;
@@ -61,11 +59,11 @@ public class NotificationService extends Service {
     }
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      // Creando canal para la notificacion (necesario para api 26 y posteriores)
+      // Creating channel for notification (necessary for api 26 and later)
       String CHANNEL_ID = "full-screen-notification";
-      CharSequence CHANNEL_NAME = "Llamada entrante";
-      String CHANNEL_DESCRIPTION = intent.getStringExtra("name") + " - " + intent.getStringExtra("number");
-      // Se le asigna IMPORTANCE_HIGH al canal de notificación para que se muestre como emergente para api 26 en adelante
+      CharSequence CHANNEL_NAME = intent.getStringExtra("channelName");
+      String CHANNEL_DESCRIPTION = intent.getStringExtra("channelDescription");
+      // Notification channel is assigned IMPORTANCE_HIGH to show as popup for api 26 onwards
       int CHANNEL_IMPORTANCE = NotificationManager.IMPORTANCE_HIGH;
       final long[] DEFAULT_VIBRATE_PATTERN = {0, 250, 250, 250};
       final NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, CHANNEL_IMPORTANCE);
@@ -73,25 +71,24 @@ public class NotificationService extends Service {
       notificationChannel.enableVibration(true);
       notificationChannel.setVibrationPattern(DEFAULT_VIBRATE_PATTERN);
       notificationChannel.setSound(Settings.System.DEFAULT_NOTIFICATION_URI, null);
-      // Register the channel with the system; you can't change the importance
-      // or other notification behaviors after this
+      // Register the channel with the system; you can't change the importance or other notification behaviors after this
       final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
       notificationManager.createNotificationChannel(notificationChannel);
 
       final NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID);
-      notification.setContentTitle("Llamada entrante");
+      notification.setContentTitle(intent.getStringExtra("channelName"));
       notification.setContentText(intent.getStringExtra("name") + " - " + intent.getStringExtra("number"));
       notification.setTicker("Call_STATUS");
-      // Para no mostrar el horario de notificación. No aporta información útil al usuario
+      // To not show the notification schedule. Does not provide useful information to the user
       notification.setShowWhen(false);
       notification.setSmallIcon(intent.getIntExtra("icon", 0));
       notification.setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND);
-      // Para saber si es necesario molestar al usuario con una notificación a pesar de tener activado el modo "No interrumpir"
+      // To know if it is necessary to disturb the user with a notification despite having activated the "Do not interrupt" mode
       notification.setCategory(NotificationCompat.CATEGORY_CALL);
       notification.setVibrate(DEFAULT_VIBRATE_PATTERN);
       notification.setLights(Color.WHITE, 2000, 3000);
       notification.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
-      // VISIBILITY_PUBLIC muestra el contenido completo de la notificación
+      // VISIBILITY_PUBLIC displays the full content of the notification
       notification.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
       notification.setOngoing(true);
       // Specifies a duration in milliseconds after which this notification should be canceled, if it is not already canceled.
@@ -99,7 +96,7 @@ public class NotificationService extends Service {
       // Supply a PendingIntent to be sent when the notification is clicked.
       notification.setContentIntent(tapPendingIntent);
       notification.setFullScreenIntent(pendingIntent, true);
-      // Se le asigna PRIORITY_HIGH a la notificación para que se muestre como emergente para api 25 y anteriores
+      // The notification is assigned PRIORITY_HIGH to show as a popup for api 25 and earlier
       notification.setPriority(NotificationCompat.PRIORITY_HIGH);
       notification.setCustomContentView(customView);
       notification.setCustomBigContentView(customView);

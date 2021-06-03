@@ -33,6 +33,11 @@ public class FullScreenNotificationPlugin extends Plugin {
         intent.setPackage(FullScreenNotificationPlugin._package);
         intent.putExtra("icon", FullScreenNotificationPlugin.app.getResources().getIdentifier("icon", "drawable", FullScreenNotificationPlugin._package));
 
+        String channelName = call.hasOption("channelName") ? call.getString("channelName") : "Incoming call";
+        intent.putExtra("channelName", channelName);
+        String channelDescription = call.hasOption("channelDescription") ? call.getString("channelDescription") : "Incoming call notification";
+        intent.putExtra("channelDescription", channelDescription);
+
         intent.putExtra("callerNameId",  FullScreenNotificationPlugin.app.getResources().getIdentifier("callerNameId", "id", FullScreenNotificationPlugin._package));
         String callerName = call.hasOption("callerName") ? call.getString("callerName") : "Unknown";
         intent.putExtra("callerName", callerName);

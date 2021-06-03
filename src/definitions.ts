@@ -8,6 +8,8 @@ export interface FullScreenNotificationPlugin {
     finishAndAnswerButtonText?: string,
     declineSecondCallButtonText?: string,
     holdAndAnswerButtonText?: string,
+    channelName?: string,
+    channelDescription?: string,
     icon?: string
   }): Promise<{ data: string }>;
   hide(): Promise<{ data: 'success' | 'error' }>;

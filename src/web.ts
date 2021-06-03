@@ -12,6 +12,8 @@ export class FullScreenNotificationWeb extends WebPlugin implements FullScreenNo
     finishAndAnswerButtonText?: string,
     declineSecondCallButtonText?: string,
     holdAndAnswerButtonText?: string,
+    channelName?: string,
+    channelDescription?: string,
     icon?: string
   }): Promise<{ data: string }> {
     return { data: data.callerName! };

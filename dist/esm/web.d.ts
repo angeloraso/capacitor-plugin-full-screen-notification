@@ -10,6 +10,8 @@ export declare class FullScreenNotificationWeb extends WebPlugin implements Full
         finishAndAnswerButtonText?: string;
         declineSecondCallButtonText?: string;
         holdAndAnswerButtonText?: string;
+        channelName?: string;
+        channelDescription?: string;
         icon?: string;
     }): Promise<{
         data: string;
