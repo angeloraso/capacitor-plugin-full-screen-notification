@@ -18,6 +18,7 @@ public class FullScreenNotificationPlugin extends Plugin {
     private static PluginCall call;
     private static Context context;
     private static AppCompatActivity app;
+    private static String _package;
     public static Boolean thereIsANotification = false;
 
     @PluginMethod
@@ -25,49 +26,51 @@ public class FullScreenNotificationPlugin extends Plugin {
         FullScreenNotificationPlugin.app = getActivity();
         FullScreenNotificationPlugin.call = call;
         FullScreenNotificationPlugin.context = getContext();
+        FullScreenNotificationPlugin._package = FullScreenNotificationPlugin.app.getPackageName();
+
 
         Intent intent = new Intent("android.intent.action.NOTIFICATION_SERVICE");
-        intent.setPackage(FullScreenNotificationPlugin.app.getPackageName());
-        intent.putExtra("icon", FullScreenNotificationPlugin.app.getResources().getIdentifier("icon", "drawable", FullScreenNotificationPlugin.app.getPackageName()));
+        intent.setPackage(FullScreenNotificationPlugin._package);
+        intent.putExtra("icon", FullScreenNotificationPlugin.app.getResources().getIdentifier("icon", "drawable", FullScreenNotificationPlugin._package));
 
-        intent.putExtra("callerNameId",  FullScreenNotificationPlugin.app.getResources().getIdentifier("callerNameId", "id", FullScreenNotificationPlugin.app.getPackageName()));
-        String callerName = call.hasOption("callerName") ? call.getString("callerName") : "Unknow";
+        intent.putExtra("callerNameId",  FullScreenNotificationPlugin.app.getResources().getIdentifier("callerNameId", "id", FullScreenNotificationPlugin._package));
+        String callerName = call.hasOption("callerName") ? call.getString("callerName") : "Unknown";
         intent.putExtra("callerName", callerName);
 
-        intent.putExtra("callerNumberId", FullScreenNotificationPlugin.app.getResources().getIdentifier("callerNumberId", "id", FullScreenNotificationPlugin.app.getPackageName()));
-        String callerNumber = call.hasOption("callerNumber") ? call.getString("callerNumber") : "Unknow";
+        intent.putExtra("callerNumberId", FullScreenNotificationPlugin.app.getResources().getIdentifier("callerNumberId", "id", FullScreenNotificationPlugin._package));
+        String callerNumber = call.hasOption("callerNumber") ? call.getString("callerNumber") : "Unknown";
         intent.putExtra("callerNumber", callerNumber);
 
         final Boolean thereIsACallInProgress = call.getBoolean("thereIsACallInProgress");
         if (!thereIsACallInProgress) {
-            intent.putExtra("activity_notification", FullScreenNotificationPlugin.app.getResources().getIdentifier("first_incoming_call", "layout", FullScreenNotificationPlugin.app.getPackageName()));
-            intent.putExtra("declineButton", FullScreenNotificationPlugin.app.getResources().getIdentifier("declineButton", "id", FullScreenNotificationPlugin.app.getPackageName()));
-            intent.putExtra("answerButton", FullScreenNotificationPlugin.app.getResources().getIdentifier("answerButton", "id", FullScreenNotificationPlugin.app.getPackageName()));
+            intent.putExtra("firstIncomingCall", FullScreenNotificationPlugin.app.getResources().getIdentifier("first_incoming_call", "layout", FullScreenNotificationPlugin._package));
+            intent.putExtra("declineButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("declineButtonId", "id", FullScreenNotificationPlugin._package));
+            intent.putExtra("answerButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("answerButtonId", "id", FullScreenNotificationPlugin._package));
 
-            intent.putExtra("declineButtonTextId", FullScreenNotificationPlugin.app.getResources().getIdentifier("declineButtonTextId", "id", FullScreenNotificationPlugin.app.getPackageName()));
+            intent.putExtra("declineButtonTextId", FullScreenNotificationPlugin.app.getResources().getIdentifier("declineButtonTextId", "id", FullScreenNotificationPlugin._package));
             String declineButtonText = call.hasOption("declineButtonText") ? call.getString("declineButtonText") : "Decline";
             intent.putExtra("declineButtonText", declineButtonText);
 
-            intent.putExtra("answerButtonTextId", FullScreenNotificationPlugin.app.getResources().getIdentifier("answerButtonTextId", "id", FullScreenNotificationPlugin.app.getPackageName()));
+            intent.putExtra("answerButtonTextId", FullScreenNotificationPlugin.app.getResources().getIdentifier("answerButtonTextId", "id", FullScreenNotificationPlugin._package));
             String answerButtonText = call.hasOption("answerButtonText") ? call.getString("answerButtonText") : "Answer";
             intent.putExtra("answerButtonText", answerButtonText);
         } else {
-            intent.putExtra("activity_notification", FullScreenNotificationPlugin.app.getResources().getIdentifier("second_incoming_call", "layout", FullScreenNotificationPlugin.app.getPackageName()));
-            intent.putExtra("finishAndAnswerBackButton", FullScreenNotificationPlugin.app.getResources().getIdentifier("finishAndAnswerBackButtonId", "id", FullScreenNotificationPlugin.app.getPackageName()));
-            intent.putExtra("finishAndAnswerFrontButton", FullScreenNotificationPlugin.app.getResources().getIdentifier("finishAndAnswerFrontButtonId", "id", FullScreenNotificationPlugin.app.getPackageName()));
-            intent.putExtra("declineButton", FullScreenNotificationPlugin.app.getResources().getIdentifier("declineSecondCallButtonId", "id", FullScreenNotificationPlugin.app.getPackageName()));
-            intent.putExtra("holdAndAnswerBackButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("holdAndAnswerBackButtonId", "id", FullScreenNotificationPlugin.app.getPackageName()));
-            intent.putExtra("holdAndAnswerFrontButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("holdAndAnswerFrontButtonId", "id", FullScreenNotificationPlugin.app.getPackageName()));
+            intent.putExtra("secondIncomingCall", FullScreenNotificationPlugin.app.getResources().getIdentifier("second_incoming_call", "layout", FullScreenNotificationPlugin._package));
+            intent.putExtra("finishAndAnswerBackButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("finishAndAnswerBackButtonId", "id", FullScreenNotificationPlugin._package));
+            intent.putExtra("finishAndAnswerFrontButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("finishAndAnswerFrontButtonId", "id", FullScreenNotificationPlugin._package));
+            intent.putExtra("declineSecondCallButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("declineSecondCallButtonId", "id", FullScreenNotificationPlugin._package));
+            intent.putExtra("holdAndAnswerBackButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("holdAndAnswerBackButtonId", "id", FullScreenNotificationPlugin._package));
+            intent.putExtra("holdAndAnswerFrontButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("holdAndAnswerFrontButtonId", "id", FullScreenNotificationPlugin._package));
 
-            intent.putExtra("finishAndAnswerButtonTextId", FullScreenNotificationPlugin.app.getResources().getIdentifier("finishAndAnswerButtonTextId", "id", FullScreenNotificationPlugin.app.getPackageName()));
+            intent.putExtra("finishAndAnswerButtonTextId", FullScreenNotificationPlugin.app.getResources().getIdentifier("finishAndAnswerButtonTextId", "id", FullScreenNotificationPlugin._package));
             String finishAndAnswerButtonText = call.hasOption("finishAndAnswerButtonText") ? call.getString("finishAndAnswerButtonText") : "Finish and answer";
             intent.putExtra("finishAndAnswerButtonText", finishAndAnswerButtonText);
 
-            intent.putExtra("declineSecondCallButtonTextId", FullScreenNotificationPlugin.app.getResources().getIdentifier("declineSecondCallButtonTextId", "id", FullScreenNotificationPlugin.app.getPackageName()));
+            intent.putExtra("declineSecondCallButtonTextId", FullScreenNotificationPlugin.app.getResources().getIdentifier("declineSecondCallButtonTextId", "id", FullScreenNotificationPlugin._package));
             String declineSecondCallButtonText = call.hasOption("declineSecondCallButtonText") ? call.getString("declineSecondCallButtonText") : "Decline";
             intent.putExtra("declineSecondCallButtonText", declineSecondCallButtonText);
 
-            intent.putExtra("holdAndAnswerButtonTextId", FullScreenNotificationPlugin.app.getResources().getIdentifier("holdAndAnswerButtonTextId", "id", FullScreenNotificationPlugin.app.getPackageName()));
+            intent.putExtra("holdAndAnswerButtonTextId", FullScreenNotificationPlugin.app.getResources().getIdentifier("holdAndAnswerButtonTextId", "id", FullScreenNotificationPlugin._package));
             String holdAndAnswerButtonText = call.hasOption("holdAndAnswerButtonText") ? call.getString("holdAndAnswerButtonText") : "Hold and answer";
             intent.putExtra("holdAndAnswerButtonText", holdAndAnswerButtonText);
         }

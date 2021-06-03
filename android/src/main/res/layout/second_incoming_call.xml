@@ -53,6 +53,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:translationX="-5dip"
         android:layout_weight="0.30"
         android:gravity="center"
         style="?android:attr/buttonBarStyle">
@@ -67,8 +68,8 @@
           style="?android:attr/borderlessButtonStyle"/>
       <Button
           android:id="@+id/finishAndAnswerFrontButtonId"
-          android:layout_width="50dip"
-          android:layout_height="50dip"
+          android:layout_width="45dip"
+          android:layout_height="45dip"
           android:translationX="25dip"
           android:translationY="-25dip"
           android:background="@drawable/button"
@@ -119,6 +120,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.30"
+        android:translationX="-20dip"
         android:orientation="vertical"
         android:gravity="center"
         style="?android:attr/buttonBarStyle">

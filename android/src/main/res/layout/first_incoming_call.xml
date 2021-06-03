@@ -58,7 +58,7 @@
         style="?android:attr/buttonBarStyle">
 
         <Button
-          android:id="@+id/declineButton"
+          android:id="@+id/declineButtonId"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:minHeight="70dip"
@@ -87,7 +87,7 @@
         style="?android:attr/buttonBarStyle">
 
       <Button
-          android:id="@+id/answerButton"
+          android:id="@+id/answerButtonId"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:minHeight="70dip"

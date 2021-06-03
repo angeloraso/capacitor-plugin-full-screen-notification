@@ -25,48 +25,39 @@ public class NotificationService extends Service {
   @Override
   public int onStartCommand (Intent intent, int flags, int startId) {
     NotificationService.that = this;
-    final RemoteViews customView = new RemoteViews(intent.getPackage(), intent.getIntExtra("activity_notification", 0));
+    RemoteViews customView;
     final Intent notificationIntent = new Intent("android.intent.action.NOTIFICATION_ACTIVITY");
     final Intent declineIntent = new Intent(this, DeclineReceiver.class);
     final Intent answerIntent = new Intent(this, AnswerReceiver.class);
     final Intent terminateIntent = new Intent(this, TerminateReceiver.class);
+    final Intent declineSecondCallIntent = new Intent(this, DeclineReceiver.class);
+    final Intent holdAndAnswerIntent = new Intent(this, AnswerReceiver.class);
     final Intent tapIntent = new Intent(this, TapReceiver.class);
 
     final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent declinePendingIntent = PendingIntent.getBroadcast(this, 0, declineIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent answerPendingIntent = PendingIntent.getBroadcast(this, 0, answerIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent terminatePendingIntent = PendingIntent.getBroadcast(this, 0, terminateIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    final PendingIntent declineSecondCallPendingIntent = PendingIntent.getBroadcast(this, 0, declineSecondCallIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    final PendingIntent holdAndAnswerPendingIntent = PendingIntent.getBroadcast(this, 0, holdAndAnswerIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     final PendingIntent tapPendingIntent = PendingIntent.getBroadcast(this, 0, tapIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-    customView.setTextViewText(intent.getIntExtra("callerNameId", 0), intent.getStringExtra("callerName"));
-    customView.setTextViewText(intent.getIntExtra("callerNumberId", 0), intent.getStringExtra("callerNumber"));
-
-    if (!intent.hasExtra("finishAndAnswerButton")) {
-      customView.setOnClickPendingIntent(intent.getIntExtra("declineButton", 0), declinePendingIntent);
-      customView.setOnClickPendingIntent(intent.getIntExtra("answerButton", 0), answerPendingIntent);
+    if (intent.hasExtra("firstIncomingCall")) {
+      customView = new RemoteViews(intent.getPackage(), intent.getIntExtra("firstIncomingCall", 0));
+      customView.setTextViewText(intent.getIntExtra("callerNameId", 0), intent.getStringExtra("callerName"));
+      customView.setTextViewText(intent.getIntExtra("callerNumberId", 0), intent.getStringExtra("callerNumber"));
+      customView.setOnClickPendingIntent(intent.getIntExtra("declineButtonId", 0), declinePendingIntent);
+      customView.setOnClickPendingIntent(intent.getIntExtra("answerButtonId", 0), answerPendingIntent);
       customView.setTextViewText(intent.getIntExtra("declineButtonTextId", 0), intent.getStringExtra("declineButtonText"));
       customView.setTextViewText(intent.getIntExtra("answerButtonTextId", 0), intent.getStringExtra("answerButtonText"));
     } else {
-      customView.setOnClickPendingIntent(intent.getIntExtra("finishAndAnswerBackButton", 0), terminatePendingIntent);
-      customView.setOnClickPendingIntent(intent.getIntExtra("finishAndAnswerFrontButton", 0), terminatePendingIntent);
-      customView.setOnClickPendingIntent(intent.getIntExtra("declineButton", 0), declinePendingIntent);
-      customView.setOnClickPendingIntent(intent.getIntExtra("holdAndAnswerBackButtonId", 0), answerPendingIntent);
-      customView.setOnClickPendingIntent(intent.getIntExtra("holdAndAnswerFrontButtonId", 0), answerPendingIntent);
+      customView = new RemoteViews(intent.getPackage(), intent.getIntExtra("secondIncomingCall", 0));
+      customView.setOnClickPendingIntent(intent.getIntExtra("finishAndAnswerFrontButtonId", 0), terminatePendingIntent);
+      customView.setOnClickPendingIntent(intent.getIntExtra("declineSecondCallButtonId", 0), declineSecondCallPendingIntent);
+      customView.setOnClickPendingIntent(intent.getIntExtra("holdAndAnswerFrontButtonId", 0), holdAndAnswerPendingIntent);
       customView.setTextViewText(intent.getIntExtra("finishAndAnswerButtonTextId", 0), intent.getStringExtra("finishAndAnswerButtonText"));
       customView.setTextViewText(intent.getIntExtra("declineSecondCallButtonTextId", 0), intent.getStringExtra("declineSecondCallButtonText"));
       customView.setTextViewText(intent.getIntExtra("holdAndAnswerButtonTextId", 0), intent.getStringExtra("holdAndAnswerButtonText"));
-    }
-
-    PowerManager powerManager = (PowerManager) this.getSystemService(POWER_SERVICE);
-
-    final String WAKE_LOCK_TAG = "fullscreennotification::MH24_SCREENLOCK";
-
-    // If screen is not already on, turn it on (get wake_lock for 10 seconds)
-    if (!powerManager.isInteractive()){
-      PowerManager.WakeLock wl = powerManager.newWakeLock(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |PowerManager.ACQUIRE_CAUSES_WAKEUP |PowerManager.ON_AFTER_RELEASE,WAKE_LOCK_TAG);
-      wl.acquire(10000);
-      PowerManager.WakeLock wl_cpu = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,WAKE_LOCK_TAG);
-      wl_cpu.acquire(10000);
     }
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
