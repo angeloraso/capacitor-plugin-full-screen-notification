@@ -23,6 +23,7 @@ public class NotificationService extends Service {
 
   @Override
   public int onStartCommand (Intent intent, int flags, int startId) {
+    NotificationService.notificationId++;
     NotificationService.that = this;
     RemoteViews customView;
     final Intent notificationIntent = new Intent("android.intent.action.NOTIFICATION_ACTIVITY");
@@ -86,21 +87,19 @@ public class NotificationService extends Service {
       notification.setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND);
       // To know if it is necessary to disturb the user with a notification despite having activated the "Do not interrupt" mode
       notification.setCategory(NotificationCompat.CATEGORY_CALL);
-      notification.setVibrate(DEFAULT_VIBRATE_PATTERN);
-      notification.setLights(Color.WHITE, 2000, 3000);
-      notification.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+      notification.setDefaults(Notification.DEFAULT_ALL);
       // VISIBILITY_PUBLIC displays the full content of the notification
       notification.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
       notification.setOngoing(true);
       // Supply a PendingIntent to be sent when the notification is clicked.
       notification.setContentIntent(tapPendingIntent);
       notification.setFullScreenIntent(pendingIntent, true);
-      // The notification is assigned PRIORITY_HIGH to show as a popup for api 25 and earlier
-      notification.setPriority(NotificationCompat.PRIORITY_HIGH);
+      // The notification is assigned PRIORITY_MAX to show as a popup for api 25 and earlier
+      notification.setPriority(NotificationCompat.PRIORITY_MAX);
       notification.setCustomContentView(customView);
       notification.setCustomBigContentView(customView);
 
-      startForeground(NotificationService.notificationId++, notification.build());
+      startForeground(NotificationService.notificationId, notification.build());
     }
 
     return flags;
