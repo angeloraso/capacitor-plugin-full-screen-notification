@@ -114,6 +114,7 @@ public class FullScreenNotificationPlugin extends Plugin {
             case "terminate":
                 output.put("data", "terminate");
                 FullScreenNotificationPlugin.call.resolve(output);
+                openApp();
                 break;
             case "tap":
                 openApp();
