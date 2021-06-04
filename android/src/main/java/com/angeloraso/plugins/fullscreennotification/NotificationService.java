@@ -64,11 +64,12 @@ public class NotificationService extends Service {
       customView.setTextViewText(intent.getIntExtra("holdAndAnswerButtonTextId", 0), intent.getStringExtra("holdAndAnswerButtonText"));
     }
 
+    // Creating channel for notification (necessary for api 26 and later)
+    String CHANNEL_ID = "full-screen-notification";
+    CharSequence CHANNEL_NAME = intent.getStringExtra("channelName");
+    String CHANNEL_DESCRIPTION = intent.getStringExtra("channelDescription");
+
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      // Creating channel for notification (necessary for api 26 and later)
-      String CHANNEL_ID = "full-screen-notification";
-      CharSequence CHANNEL_NAME = intent.getStringExtra("channelName");
-      String CHANNEL_DESCRIPTION = intent.getStringExtra("channelDescription");
       // Notification channel is assigned IMPORTANCE_HIGH to show as popup for api 26 onwards
       int CHANNEL_IMPORTANCE = NotificationManager.IMPORTANCE_HIGH;
       final long[] DEFAULT_VIBRATE_PATTERN = {0, 250, 250, 250};
@@ -80,29 +81,29 @@ public class NotificationService extends Service {
       // Register the channel with the system; you can't change the importance or other notification behaviors after this
       final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
       notificationManager.createNotificationChannel(notificationChannel);
-
-      final NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID);
-      notification.setContentTitle(intent.getStringExtra("channelName"));
-      notification.setContentText(intent.getStringExtra("name") + " - " + intent.getStringExtra("number"));
-      notification.setTicker("Call_STATUS");
-      notification.setSmallIcon(R.drawable.answer_24);
-      notification.setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND);
-      // To know if it is necessary to disturb the user with a notification despite having activated the "Do not interrupt" mode
-      notification.setCategory(NotificationCompat.CATEGORY_CALL);
-      notification.setDefaults(Notification.DEFAULT_ALL);
-      // VISIBILITY_PUBLIC displays the full content of the notification
-      notification.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
-      notification.setOngoing(true);
-      // Supply a PendingIntent to be sent when the notification is clicked.
-      notification.setContentIntent(tapPendingIntent);
-      notification.setFullScreenIntent(pendingIntent, true);
-      // The notification is assigned PRIORITY_MAX to show as a popup for api 25 and earlier
-      notification.setPriority(NotificationCompat.PRIORITY_MAX);
-      notification.setCustomContentView(customView);
-      notification.setCustomBigContentView(customView);
-
-      startForeground(NotificationService.notificationId, notification.build());
     }
+
+    final NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID);
+    notification.setContentTitle(intent.getStringExtra("channelName"));
+    notification.setContentText(intent.getStringExtra("name") + " - " + intent.getStringExtra("number"));
+    notification.setTicker("Call_STATUS");
+    notification.setSmallIcon(R.drawable.answer_24);
+    notification.setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND);
+    // To know if it is necessary to disturb the user with a notification despite having activated the "Do not interrupt" mode
+    notification.setCategory(NotificationCompat.CATEGORY_CALL);
+    notification.setDefaults(Notification.DEFAULT_ALL);
+    // VISIBILITY_PUBLIC displays the full content of the notification
+    notification.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+    notification.setOngoing(true);
+    // Supply a PendingIntent to be sent when the notification is clicked.
+    notification.setContentIntent(tapPendingIntent);
+    notification.setFullScreenIntent(pendingIntent, true);
+    // The notification is assigned PRIORITY_MAX to show as a popup for api 25 and earlier
+    notification.setPriority(NotificationCompat.PRIORITY_MAX);
+    notification.setCustomContentView(customView);
+    notification.setCustomBigContentView(customView);
+
+    startForeground(NotificationService.notificationId, notification.build());
 
     return flags;
   }
