@@ -20,7 +20,7 @@
       android:contentDescription="App logo" />
 
     <TextView
-      android:id="@+id/callerNameId"
+      android:id="@+id/firstCallerNameId"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="10dp"
@@ -31,7 +31,7 @@
       android:padding="5dp" />
 
     <TextView
-      android:id="@+id/callerNumberId"
+      android:id="@+id/firstCallerNumberId"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"

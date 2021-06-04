@@ -45,8 +45,8 @@ public class NotificationService extends Service {
     if (intent.hasExtra("firstIncomingCall")) {
       customView = new RemoteViews(intent.getPackage(), intent.getIntExtra("firstIncomingCall", 0));
       customView.setImageViewResource(intent.getIntExtra("firstCallLogoId", 0), intent.getIntExtra("firstCallLogo", 0));
-      customView.setTextViewText(intent.getIntExtra("callerNameId", 0), intent.getStringExtra("callerName"));
-      customView.setTextViewText(intent.getIntExtra("callerNumberId", 0), intent.getStringExtra("callerNumber"));
+      customView.setTextViewText(intent.getIntExtra("firstCallerNameId", 0), intent.getStringExtra("callerName"));
+      customView.setTextViewText(intent.getIntExtra("firstCallerNumberId", 0), intent.getStringExtra("callerNumber"));
       customView.setOnClickPendingIntent(intent.getIntExtra("declineButtonId", 0), declinePendingIntent);
       customView.setOnClickPendingIntent(intent.getIntExtra("answerButtonId", 0), answerPendingIntent);
       customView.setTextViewText(intent.getIntExtra("declineButtonTextId", 0), intent.getStringExtra("declineButtonText"));
@@ -54,6 +54,8 @@ public class NotificationService extends Service {
     } else {
       customView = new RemoteViews(intent.getPackage(), intent.getIntExtra("secondIncomingCall", 0));
       customView.setImageViewResource(intent.getIntExtra("secondCallLogoId", 0), intent.getIntExtra("secondCallLogo", 0));
+      customView.setTextViewText(intent.getIntExtra("secondCallerNameId", 0), intent.getStringExtra("callerName"));
+      customView.setTextViewText(intent.getIntExtra("secondCallerNumberId", 0), intent.getStringExtra("callerNumber"));
       customView.setOnClickPendingIntent(intent.getIntExtra("finishAndAnswerFrontButtonId", 0), terminatePendingIntent);
       customView.setOnClickPendingIntent(intent.getIntExtra("declineSecondCallButtonId", 0), declineSecondCallPendingIntent);
       customView.setOnClickPendingIntent(intent.getIntExtra("holdAndAnswerFrontButtonId", 0), holdAndAnswerPendingIntent);
@@ -83,8 +85,6 @@ public class NotificationService extends Service {
       notification.setContentTitle(intent.getStringExtra("channelName"));
       notification.setContentText(intent.getStringExtra("name") + " - " + intent.getStringExtra("number"));
       notification.setTicker("Call_STATUS");
-      // To not show the notification schedule. Does not provide useful information to the user
-      notification.setShowWhen(false);
       notification.setSmallIcon(R.drawable.answer_24);
       notification.setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND);
       // To know if it is necessary to disturb the user with a notification despite having activated the "Do not interrupt" mode

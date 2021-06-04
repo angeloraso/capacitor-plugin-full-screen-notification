@@ -40,17 +40,17 @@ public class FullScreenNotificationPlugin extends Plugin {
         String channelDescription = call.hasOption("channelDescription") ? call.getString("channelDescription") : "Incoming call notification";
         intent.putExtra("channelDescription", channelDescription);
 
-        intent.putExtra("callerNameId",  FullScreenNotificationPlugin.app.getResources().getIdentifier("callerNameId", "id", FullScreenNotificationPlugin._package));
-        String callerName = call.hasOption("callerName") ? call.getString("callerName") : "Unknown";
-        intent.putExtra("callerName", callerName);
-
-        intent.putExtra("callerNumberId", FullScreenNotificationPlugin.app.getResources().getIdentifier("callerNumberId", "id", FullScreenNotificationPlugin._package));
-        String callerNumber = call.hasOption("callerNumber") ? call.getString("callerNumber") : "Unknown";
-        intent.putExtra("callerNumber", callerNumber);
-
         final Boolean thereIsACallInProgress = call.getBoolean("thereIsACallInProgress");
         if (!thereIsACallInProgress) {
             intent.putExtra("firstIncomingCall", FullScreenNotificationPlugin.app.getResources().getIdentifier("first_incoming_call", "layout", FullScreenNotificationPlugin._package));
+
+            intent.putExtra("firstCallerNameId",  FullScreenNotificationPlugin.app.getResources().getIdentifier("firstCallerNameId", "id", FullScreenNotificationPlugin._package));
+            String callerName = call.hasOption("callerName") ? call.getString("callerName") : "Unknown";
+            intent.putExtra("firstCallerName", callerName);
+
+            intent.putExtra("firstCallerNumberId", FullScreenNotificationPlugin.app.getResources().getIdentifier("firstCallerNumberId", "id", FullScreenNotificationPlugin._package));
+            String callerNumber = call.hasOption("callerNumber") ? call.getString("callerNumber") : "Unknown";
+            intent.putExtra("firstCallerNumber", callerNumber);
 
             intent.putExtra("firstCallLogoId", FullScreenNotificationPlugin.app.getResources().getIdentifier("firstCallLogoId", "id", FullScreenNotificationPlugin._package));
             String logoName = call.hasOption("logo") ? call.getString("logo") : "logo";
@@ -69,6 +69,14 @@ public class FullScreenNotificationPlugin extends Plugin {
             intent.putExtra("answerButtonText", answerButtonText);
         } else {
             intent.putExtra("secondIncomingCall", FullScreenNotificationPlugin.app.getResources().getIdentifier("second_incoming_call", "layout", FullScreenNotificationPlugin._package));
+
+            intent.putExtra("secondCallerNameId",  FullScreenNotificationPlugin.app.getResources().getIdentifier("secondCallerNameId", "id", FullScreenNotificationPlugin._package));
+            String callerName = call.hasOption("callerName") ? call.getString("callerName") : "Unknown";
+            intent.putExtra("secondCallerName", callerName);
+
+            intent.putExtra("secondCallerNumberId", FullScreenNotificationPlugin.app.getResources().getIdentifier("secondCallerNumberId", "id", FullScreenNotificationPlugin._package));
+            String callerNumber = call.hasOption("callerNumber") ? call.getString("callerNumber") : "Unknown";
+            intent.putExtra("secondCallerNumber", callerNumber);
 
             intent.putExtra("secondCallLogoId", FullScreenNotificationPlugin.app.getResources().getIdentifier("secondCallLogoId", "id", FullScreenNotificationPlugin._package));
             String logoName = call.hasOption("logo") ? call.getString("logo") : "logo";
