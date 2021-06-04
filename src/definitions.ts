@@ -1,7 +1,8 @@
 export interface FullScreenNotificationPlugin {
-  show(data: {
+  show(data?: {
     callerName?: string,
     callerNumber?: string,
+    logo?: string,
     thereIsACallInProgress?: boolean,
     declineButtonText?: string,
     answerButtonText?: string,
@@ -9,8 +10,7 @@ export interface FullScreenNotificationPlugin {
     declineSecondCallButtonText?: string,
     holdAndAnswerButtonText?: string,
     channelName?: string,
-    channelDescription?: string,
-    icon?: string
+    channelDescription?: string
   }): Promise<{ data: string }>;
   hide(): Promise<{ data: 'success' | 'error' }>;
 }

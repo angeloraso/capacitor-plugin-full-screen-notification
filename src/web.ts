@@ -3,9 +3,10 @@ import { WebPlugin } from '@capacitor/core';
 import type { FullScreenNotificationPlugin } from './definitions';
 
 export class FullScreenNotificationWeb extends WebPlugin implements FullScreenNotificationPlugin {
-  async show(data: {
+  async show(data?: {
     callerName?: string,
     callerNumber?: string,
+    logo?: string
     thereIsACallInProgress?: boolean,
     declineButtonText?: string,
     answerButtonText?: string,
@@ -13,10 +14,9 @@ export class FullScreenNotificationWeb extends WebPlugin implements FullScreenNo
     declineSecondCallButtonText?: string,
     holdAndAnswerButtonText?: string,
     channelName?: string,
-    channelDescription?: string,
-    icon?: string
+    channelDescription?: string
   }): Promise<{ data: string }> {
-    return { data: data.callerName! };
+    return { data: data?.callerName ?? 'success' };
   }
 
   async hide(): Promise<{ data: 'success' | 'error' }> {

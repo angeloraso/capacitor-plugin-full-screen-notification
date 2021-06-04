@@ -12,13 +12,12 @@
     android:orientation="vertical">
 
     <ImageView
-      android:id="@+id/icon"
+      android:id="@+id/firstCallLogoId"
       android:layout_width="70dp"
       android:layout_height="70dp"
       android:layout_marginTop="10dp"
       android:layout_gravity="center"
-      android:contentDescription="App icon"
-      android:src="@drawable/icon" />
+      android:contentDescription="App logo" />
 
     <TextView
       android:id="@+id/callerNameId"

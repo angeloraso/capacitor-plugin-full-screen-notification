@@ -7,12 +7,12 @@
     "methods": [
       {
         "name": "show",
-        "signature": "(data: { callerName?: string; callerNumber?: string; thereIsACallInProgress?: boolean; declineButtonText?: string; answerButtonText?: string; finishAndAnswerButtonText?: string; declineSecondCallButtonText?: string; holdAndAnswerButtonText?: string; channelName?: string; channelDescription?: string; icon?: string; }) => any",
+        "signature": "(data?: { callerName?: string | undefined; callerNumber?: string | undefined; logo?: string | undefined; thereIsACallInProgress?: boolean | undefined; declineButtonText?: string | undefined; answerButtonText?: string | undefined; finishAndAnswerButtonText?: string | undefined; declineSecondCallButtonText?: string | undefined; holdAndAnswerButtonText?: string | undefined; channelName?: string | undefined; channelDescription?: string | undefined; } | undefined) => any",
         "parameters": [
           {
             "name": "data",
             "docs": "",
-            "type": "{ callerName?: string | undefined; callerNumber?: string | undefined; thereIsACallInProgress?: boolean | undefined; declineButtonText?: string | undefined; answerButtonText?: string | undefined; finishAndAnswerButtonText?: string | undefined; declineSecondCallButtonText?: string | undefined; holdAndAnswerButtonText?: string | undefined; channelName?: string | undefined; channelDescription?: string | undefined; icon?: string | undefined; }"
+            "type": "{ callerName?: string | undefined; callerNumber?: string | undefined; logo?: string | undefined; thereIsACallInProgress?: boolean | undefined; declineButtonText?: string | undefined; answerButtonText?: string | undefined; finishAndAnswerButtonText?: string | undefined; declineSecondCallButtonText?: string | undefined; holdAndAnswerButtonText?: string | undefined; channelName?: string | undefined; channelDescription?: string | undefined; } | undefined"
           }
         ],
         "returns": "any",

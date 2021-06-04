@@ -24,12 +24,12 @@ npx cap sync
 ### show(...)
 
 ```typescript
-show(data: { callerName?: string; callerNumber?: string; thereIsACallInProgress?: boolean; declineButtonText?: string; answerButtonText?: string; finishAndAnswerButtonText?: string; declineSecondCallButtonText?: string; holdAndAnswerButtonText?: string; channelName?: string; channelDescription?: string; icon?: string; }) => any
+show(data?: { callerName?: string | undefined; callerNumber?: string | undefined; logo?: string | undefined; thereIsACallInProgress?: boolean | undefined; declineButtonText?: string | undefined; answerButtonText?: string | undefined; finishAndAnswerButtonText?: string | undefined; declineSecondCallButtonText?: string | undefined; holdAndAnswerButtonText?: string | undefined; channelName?: string | undefined; channelDescription?: string | undefined; } | undefined) => any
 ```
 
 | Param      | Type                                                                                                                                                                                                                                                                                                                                |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`data`** | <code>{ callerName?: string; callerNumber?: string; thereIsACallInProgress?: boolean; declineButtonText?: string; answerButtonText?: string; finishAndAnswerButtonText?: string; declineSecondCallButtonText?: string; holdAndAnswerButtonText?: string; channelName?: string; channelDescription?: string; icon?: string; }</code> |
+| **`data`** | <code>{ callerName?: string; callerNumber?: string; logo?: string; thereIsACallInProgress?: boolean; declineButtonText?: string; answerButtonText?: string; finishAndAnswerButtonText?: string; declineSecondCallButtonText?: string; holdAndAnswerButtonText?: string; channelName?: string; channelDescription?: string; }</code> |
 
 **Returns:** <code>any</code>
 

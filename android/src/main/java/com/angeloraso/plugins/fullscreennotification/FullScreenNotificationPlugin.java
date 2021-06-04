@@ -3,6 +3,8 @@ package com.angeloraso.plugins.fullscreennotification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +34,6 @@ public class FullScreenNotificationPlugin extends Plugin {
 
         Intent intent = new Intent("android.intent.action.NOTIFICATION_SERVICE");
         intent.setPackage(FullScreenNotificationPlugin._package);
-        intent.putExtra("icon", FullScreenNotificationPlugin.app.getResources().getIdentifier("icon", "drawable", FullScreenNotificationPlugin._package));
 
         String channelName = call.hasOption("channelName") ? call.getString("channelName") : "Incoming call";
         intent.putExtra("channelName", channelName);
@@ -50,6 +51,12 @@ public class FullScreenNotificationPlugin extends Plugin {
         final Boolean thereIsACallInProgress = call.getBoolean("thereIsACallInProgress");
         if (!thereIsACallInProgress) {
             intent.putExtra("firstIncomingCall", FullScreenNotificationPlugin.app.getResources().getIdentifier("first_incoming_call", "layout", FullScreenNotificationPlugin._package));
+
+            intent.putExtra("firstCallLogoId", FullScreenNotificationPlugin.app.getResources().getIdentifier("firstCallLogoId", "id", FullScreenNotificationPlugin._package));
+            String logoName = call.hasOption("logo") ? call.getString("logo") : "logo";
+            int firstCallLogo = FullScreenNotificationPlugin.app.getResources().getIdentifier(logoName, "drawable", FullScreenNotificationPlugin._package);
+            intent.putExtra("firstCallLogo", firstCallLogo);
+
             intent.putExtra("declineButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("declineButtonId", "id", FullScreenNotificationPlugin._package));
             intent.putExtra("answerButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("answerButtonId", "id", FullScreenNotificationPlugin._package));
 
@@ -62,6 +69,12 @@ public class FullScreenNotificationPlugin extends Plugin {
             intent.putExtra("answerButtonText", answerButtonText);
         } else {
             intent.putExtra("secondIncomingCall", FullScreenNotificationPlugin.app.getResources().getIdentifier("second_incoming_call", "layout", FullScreenNotificationPlugin._package));
+
+            intent.putExtra("secondCallLogoId", FullScreenNotificationPlugin.app.getResources().getIdentifier("secondCallLogoId", "id", FullScreenNotificationPlugin._package));
+            String logoName = call.hasOption("logo") ? call.getString("logo") : "logo";
+            int secondCallLogo = FullScreenNotificationPlugin.app.getResources().getIdentifier(logoName, "drawable", FullScreenNotificationPlugin._package);
+            intent.putExtra("secondCallLogo", secondCallLogo);
+
             intent.putExtra("finishAndAnswerBackButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("finishAndAnswerBackButtonId", "id", FullScreenNotificationPlugin._package));
             intent.putExtra("finishAndAnswerFrontButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("finishAndAnswerFrontButtonId", "id", FullScreenNotificationPlugin._package));
             intent.putExtra("declineSecondCallButtonId", FullScreenNotificationPlugin.app.getResources().getIdentifier("declineSecondCallButtonId", "id", FullScreenNotificationPlugin._package));
