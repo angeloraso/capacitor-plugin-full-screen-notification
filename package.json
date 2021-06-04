@@ -1,6 +1,6 @@
 {
   "name": "capacitor-plugin-full-screen-notification",
-  "version": "0.9.10",
+  "version": "0.9.2",
   "description": "Plugin to create a full screen notification",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
