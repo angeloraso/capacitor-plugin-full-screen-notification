@@ -154,10 +154,8 @@ public class FullScreenNotificationPlugin extends Plugin {
     }
 
     private static void dismissNotification() {
-        if (Build.VERSION.SDK_INT >= 26 && NotificationService.that != null) {
-            NotificationService.that.stopForeground(FullScreenNotificationPlugin.thereIsANotification);
-            FullScreenNotificationPlugin.thereIsANotification = false;
-        }
+        NotificationService.notificationManager.cancelAll();
+        NotificationService.notificationManager.deleteNotificationChannel(NotificationService.CHANNEL_ID);
     }
 
 }

@@ -7,7 +7,6 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -17,14 +16,19 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 public class NotificationService extends Service {
+  public static NotificationManager notificationManager;
+  private int notificationId = 0;
 
-  public static Service that = null;
-  public static int notificationId = 0;
+  public static String CHANNEL_ID = "full-screen-notification";
+
+  @Override
+  public void onCreate() {
+    notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+  }
 
   @Override
   public int onStartCommand (Intent intent, int flags, int startId) {
-    NotificationService.notificationId++;
-    NotificationService.that = this;
+    notificationId = (int) System.currentTimeMillis();
     RemoteViews customView;
     final Intent notificationIntent = new Intent("android.intent.action.NOTIFICATION_ACTIVITY");
     final Intent declineIntent = new Intent(this, DeclineReceiver.class);
@@ -64,12 +68,10 @@ public class NotificationService extends Service {
       customView.setTextViewText(intent.getIntExtra("holdAndAnswerButtonTextId", 0), intent.getStringExtra("holdAndAnswerButtonText"));
     }
 
-    // Creating channel for notification (necessary for api 26 and later)
-    String CHANNEL_ID = "full-screen-notification";
-    CharSequence CHANNEL_NAME = intent.getStringExtra("channelName");
-    String CHANNEL_DESCRIPTION = intent.getStringExtra("channelDescription");
-
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      // Creating channel for notification (necessary for api 26 and later)
+      CharSequence CHANNEL_NAME = intent.getStringExtra("channelName");
+      String CHANNEL_DESCRIPTION = intent.getStringExtra("channelDescription");
       // Notification channel is assigned IMPORTANCE_HIGH to show as popup for api 26 onwards
       int CHANNEL_IMPORTANCE = NotificationManager.IMPORTANCE_HIGH;
       final long[] DEFAULT_VIBRATE_PATTERN = {0, 250, 250, 250};
@@ -79,7 +81,7 @@ public class NotificationService extends Service {
       notificationChannel.setVibrationPattern(DEFAULT_VIBRATE_PATTERN);
       notificationChannel.setSound(Settings.System.DEFAULT_NOTIFICATION_URI, null);
       // Register the channel with the system; you can't change the importance or other notification behaviors after this
-      final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+      notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
       notificationManager.createNotificationChannel(notificationChannel);
     }
 
@@ -92,9 +94,11 @@ public class NotificationService extends Service {
     // To know if it is necessary to disturb the user with a notification despite having activated the "Do not interrupt" mode
     notification.setCategory(NotificationCompat.CATEGORY_CALL);
     notification.setDefaults(Notification.DEFAULT_ALL);
+    notification.setWhen(System.currentTimeMillis());
     // VISIBILITY_PUBLIC displays the full content of the notification
     notification.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
     notification.setOngoing(true);
+    notification.setAutoCancel(true);
     // Supply a PendingIntent to be sent when the notification is clicked.
     notification.setContentIntent(tapPendingIntent);
     notification.setFullScreenIntent(pendingIntent, true);
@@ -103,7 +107,7 @@ public class NotificationService extends Service {
     notification.setCustomContentView(customView);
     notification.setCustomBigContentView(customView);
 
-    startForeground(NotificationService.notificationId, notification.build());
+    startForeground(notificationId, notification.build());
 
     return flags;
   }
