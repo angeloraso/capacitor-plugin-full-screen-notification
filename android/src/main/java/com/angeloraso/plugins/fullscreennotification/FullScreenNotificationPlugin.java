@@ -117,7 +117,7 @@ public class FullScreenNotificationPlugin extends Plugin {
     }
 
     public static void notificationAction(String action) {
-      FullScreenNotificationPlugin.dismissNotification();
+        FullScreenNotificationPlugin.dismissNotification();
         boolean validAction = true;
         JSObject output = new JSObject();
 
@@ -154,8 +154,10 @@ public class FullScreenNotificationPlugin extends Plugin {
     }
 
     private static void dismissNotification() {
-        NotificationService.notificationManager.cancelAll();
-        NotificationService.notificationManager.deleteNotificationChannel(NotificationService.CHANNEL_ID);
+        if (NotificationService.notificationManager != null) {
+            NotificationService.notificationManager.cancelAll();
+            NotificationService.notificationManager.deleteNotificationChannel(NotificationService.CHANNEL_ID);
+        }
     }
 
 }
