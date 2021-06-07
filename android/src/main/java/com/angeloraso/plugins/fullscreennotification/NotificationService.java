@@ -79,6 +79,7 @@ public class NotificationService extends Service {
       final long[] DEFAULT_VIBRATE_PATTERN = {0, 250, 250, 250};
       final NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, CHANNEL_IMPORTANCE);
       notificationChannel.setDescription(CHANNEL_DESCRIPTION);
+      notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
       notificationChannel.enableVibration(true);
       notificationChannel.setVibrationPattern(DEFAULT_VIBRATE_PATTERN);
       notificationChannel.setSound(Settings.System.DEFAULT_NOTIFICATION_URI, null);
