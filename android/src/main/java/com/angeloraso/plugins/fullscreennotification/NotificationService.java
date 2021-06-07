@@ -119,4 +119,9 @@ public class NotificationService extends Service {
   public IBinder onBind(Intent intent) {
     return null;
   }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+  }
 }
