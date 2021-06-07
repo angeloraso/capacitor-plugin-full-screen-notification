@@ -90,7 +90,7 @@ public class NotificationService extends Service {
     final NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID);
     notification.setContentTitle(intent.getStringExtra("channelName"));
     notification.setContentText(intent.getStringExtra("name") + " - " + intent.getStringExtra("number"));
-    notification.setTicker("Call_STATUS");
+    notification.setTicker(intent.getStringExtra("channelName"));
     notification.setSmallIcon(R.drawable.answer_24);
     notification.setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND);
     // To know if it is necessary to disturb the user with a notification despite having activated the "Do not interrupt" mode
