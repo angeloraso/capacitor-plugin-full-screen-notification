@@ -1,10 +1,7 @@
 package com.angeloraso.plugins.fullscreennotification;
 
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -154,9 +151,8 @@ public class FullScreenNotificationPlugin extends Plugin {
     }
 
     private static void dismissNotification() {
-        if (NotificationService.notificationManager != null) {
-            NotificationService.notificationManager.cancelAll();
-            NotificationService.notificationManager.deleteNotificationChannel(NotificationService.CHANNEL_ID);
+        if (NotificationService.that != null) {
+            NotificationService.that.stopForeground(true);
         }
     }
 

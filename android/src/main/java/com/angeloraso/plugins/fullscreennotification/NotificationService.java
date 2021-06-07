@@ -16,14 +16,16 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 public class NotificationService extends Service {
-  public static NotificationManager notificationManager;
+  private NotificationManager notificationManager;
   private int notificationId = 0;
+  private String CHANNEL_ID = "full-screen-notification";
 
-  public static String CHANNEL_ID = "full-screen-notification";
+  public static Service that;
 
   @Override
   public void onCreate() {
     notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+    NotificationService.that = this;
   }
 
   @Override
