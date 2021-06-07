@@ -100,7 +100,7 @@ public class NotificationService extends Service {
     // VISIBILITY_PUBLIC displays the full content of the notification
     notification.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
     notification.setOngoing(true);
-    notification.setAutoCancel(true);
+    notification.setAutoCancel(false);
     // Supply a PendingIntent to be sent when the notification is clicked.
     notification.setContentIntent(tapPendingIntent);
     notification.setFullScreenIntent(pendingIntent, true);
