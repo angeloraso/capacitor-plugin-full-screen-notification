@@ -30,6 +30,7 @@ public class NotificationService extends Service {
 
   @Override
   public int onStartCommand (Intent intent, int flags, int startId) {
+    NotificationCompat.Builder notification;
     notificationId = (int) System.currentTimeMillis();
     RemoteViews customView;
     final Intent notificationIntent = new Intent("android.intent.action.NOTIFICATION_ACTIVITY");
@@ -86,9 +87,11 @@ public class NotificationService extends Service {
       // Register the channel with the system; you can't change the importance or other notification behaviors after this
       notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
       notificationManager.createNotificationChannel(notificationChannel);
+      notification = new NotificationCompat.Builder(this, CHANNEL_ID);
+    } else {
+      notification = new NotificationCompat.Builder(this);
     }
 
-    final NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID);
     notification.setContentTitle(intent.getStringExtra("channelName"));
     notification.setContentText(intent.getStringExtra("name") + " - " + intent.getStringExtra("number"));
     notification.setTicker(intent.getStringExtra("channelName"));
